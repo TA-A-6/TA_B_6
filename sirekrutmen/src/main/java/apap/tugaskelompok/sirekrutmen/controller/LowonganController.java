@@ -19,6 +19,12 @@ public class LowonganController {
 	@Autowired
 	LowonganService lowonganService;
 	
+	
+	@GetMapping("/test-page")
+	private String home(Model model) {
+		return "example";
+	}
+	
 	/*
 	  Your code goes here.
 	  

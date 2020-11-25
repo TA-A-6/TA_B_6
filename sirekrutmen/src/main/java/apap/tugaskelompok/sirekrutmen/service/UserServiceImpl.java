@@ -3,13 +3,14 @@ package apap.tugaskelompok.sirekrutmen.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import apap.tugaskelompok.sirekrutmen.model.UserModel;
 import apap.tugaskelompok.sirekrutmen.repository.UserDb;
 
 import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 	@Autowired
 	UserDb userDb;
 	/*
@@ -18,4 +19,10 @@ public class UserServiceImpl {
 	  
 	  -Rian
 	 */
+
+	@Override
+	public UserModel getUserByUsername(String username) {
+		
+		return userDb.findByUsername(username);
+	}
 }
