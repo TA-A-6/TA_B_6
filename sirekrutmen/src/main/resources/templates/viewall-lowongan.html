@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Daftar Lowongan </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <br>
+        <h2 style="text-align: center;">Daftar Lowongan</h2>
+        <br>
+        <table class="table table-borderless">
+            <thead style="background-color: #e3f2fd;
+                        font-size: medium;
+                        text-align: center;">
+            <tr>
+                <th>No</th>
+                <th>Kode Lowongan</th>
+                <th>Divisi</th>
+                <th>Posisi</th>
+                <th>Jenis Lowongan</th>
+                <th>Jumlah</th>
+                <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lowongan, iterationStatus: ${listLowongan}">
+                <td th:text="iterationStatus.count"></td>
+                <td th:text="lowongan.kodeLowongan"></td>
+                <td th:text="lowongan.divisi"></td>
+                <td th:text="lowongan.posisi"></td>
+                <td th:text="lowongan.jenisLowongan.nama"></td>
+                <td th:text="lowongan.jumlah"></td>
+                <td>
+                    <a th:href="@{/lowongan/detail}+${id}+" class="btn btn-info">Detail</a>
+                    <a th:href="@{/pelamar/tambah/}" class="btn btn-primary">Melamar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
+import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import apap.tugaskelompok.sirekrutmen.service.LowonganService;
 
+import java.util.List;
+
 @Controller
 public class LowonganController {
 	@Autowired
@@ -24,12 +27,15 @@ public class LowonganController {
 	private String home(Model model) {
 		return "example";
 	}
-	
-	/*
-	  Your code goes here.
-	  
-	  -Rian
-	*/
+
+	@RequestMapping("/lowongan")
+	public String listLowongan(Model model){
+
+		List<LowonganModel> listLowongan = lowonganService.getListLowongan();
+
+		model.addAttribute("listLowongan", listLowongan);
+		return "viewall-lowongan";
+	}
 	
 
 }
