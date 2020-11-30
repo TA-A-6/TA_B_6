@@ -11,6 +11,7 @@ import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
 import apap.tugaskelompok.sirekrutmen.repository.LowonganDb;
 
 import javax.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +27,6 @@ public class LowonganServiceImpl implements LowonganService{
 
 	@Autowired
 	LamaranDb lamaranDb;
-	/*
-	  Your code goes here.
-	  Jangan lupa isi dulu interface nya sebelum ngoding disini
-	  
-	  -Rian
-	 */
 
 	@Override
 	public LowonganModel getLowonganById(Long idLowongan) {
@@ -40,6 +35,9 @@ public class LowonganServiceImpl implements LowonganService{
 	}
 
 	@Override
+	public List<LowonganModel> getListLowongan() {
+		return lowonganDb.findAll();
+
 	public List<PelamarModel> getDaftarPelamar(LowonganModel lowongan) {
 		List<PelamarModel> pelamar = new ArrayList<PelamarModel>();
 

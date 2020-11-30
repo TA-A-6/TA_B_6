@@ -28,13 +28,16 @@ public class LowonganController {
 	private String home(Model model) {
 		return "home";
 	}
-	
-	/*
-	  Your code goes here.
-	  
-	  -Rian
-	*/
 
+	@RequestMapping("/lowongan")
+	public String listLowongan(Model model){
+
+		List<LowonganModel> listLowongan = lowonganService.getListLowongan();
+
+		model.addAttribute("listLowongan", listLowongan);
+		return "viewall-lowongan";
+	}
+	
 	@GetMapping("/lowongan/detail/{id}")
 	public String detailLowongan(
 			@PathVariable(value="id") Long id,
