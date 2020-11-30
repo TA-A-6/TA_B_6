@@ -1,6 +1,7 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
+import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class LowonganController {
 	LowonganService lowonganService;
 	
 	
-	@GetMapping("/test-page")
+	@GetMapping("/home")
 	private String home(Model model) {
-		return "example";
+		return "home";
 	}
 
 	@RequestMapping("/lowongan")
@@ -37,5 +38,17 @@ public class LowonganController {
 		return "viewall-lowongan";
 	}
 	
+	@GetMapping("/lowongan/detail/{id}")
+	public String detailLowongan(
+			@PathVariable(value="id") Long id,
+			Model model
+	){
+		LowonganModel lowongan = lowonganService.getLowonganById(id);
+		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
+		model.addAttribute("lowongan",lowongan);
+		model.addAttribute("pelamar",daftarPelamar);
+		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());
+		return "view-detail-lowongan";
+	}
 
 }

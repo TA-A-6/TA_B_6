@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Lowongan</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+
+</head>
+
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-sm align-items-center justify-content-center">
+    <div class="card align-content-center justify-content-center"
+         style="width: 350px;
+         margin: auto;
+         margin-top: 30px;
+         margin-bottom: 10px;">
+        <div class="header" style="text-align: center"><h3>Detail Lowongan</h3></div>
+        <table class="table table-borderless">
+            <tbody>
+            <tr>
+                <td>Kode Lowongan</td>
+                <td th:text="': '+${lowongan.kodeLowongan}"></td>
+            </tr>
+            <tr>
+                <td>Divisi</td>
+                <td th:text="': '+${lowongan.divisi}"></td>
+            </tr>
+            <tr>
+                <td>Posisi</td>
+                <td th:text="': '+${lowongan.posisi}"></td>
+            </tr>
+            <tr>
+                <td>Jenis Lowongan</td>
+                <td th:text="': '+${jenisLowongan}"></td>
+            </tr>
+            <tr>
+                <td>Jumlah</td>
+                <td th:text="': '+${lowongan.jumlah}"></td>
+            </tr>
+            <tr>
+                <td>Daftar Pelamar</td>
+                <td>:</td>
+            </tr>
+            <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
+                <td></td>
+                <td th:text="' '+${iterationStatus.count}+'. '+${pelamarNama.nama}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a class="btn btn-outline-primary">Hapus</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
