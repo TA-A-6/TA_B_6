@@ -24,9 +24,9 @@ public class LowonganController {
 	LowonganService lowonganService;
 	
 	
-	@GetMapping("/test-page")
+	@GetMapping("/home")
 	private String home(Model model) {
-		return "example";
+		return "home";
 	}
 	
 	/*
