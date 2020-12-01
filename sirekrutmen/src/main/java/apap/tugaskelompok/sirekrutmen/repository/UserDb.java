@@ -8,8 +8,9 @@ import apap.tugaskelompok.sirekrutmen.model.UserModel;
 
 
 @Repository
-public interface UserDb extends JpaRepository<UserModel, Long>{
+public interface UserDb extends JpaRepository<UserModel, String>{
 	
 	UserModel findByUsername(String username);
+
 
 }

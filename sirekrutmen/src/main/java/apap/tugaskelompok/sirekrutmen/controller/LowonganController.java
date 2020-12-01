@@ -1,5 +1,11 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
+import apap.tugaskelompok.sirekrutmen.model.JenisLowonganModel;
+import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
+import apap.tugaskelompok.sirekrutmen.model.UserModel;
+import apap.tugaskelompok.sirekrutmen.repository.LowonganDb;
+import apap.tugaskelompok.sirekrutmen.service.JenisLowonganService;
+import apap.tugaskelompok.sirekrutmen.service.UserService;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +20,66 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import apap.tugaskelompok.sirekrutmen.service.LowonganService;
 
+import java.util.List;
+
 @Controller
 public class LowonganController {
 	@Autowired
 	LowonganService lowonganService;
-	
+
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	JenisLowonganService jenisLowonganService;
+
+	@Autowired
+	LowonganDb lowonganDb;
 	
 	@GetMapping("/test-page")
 	private String home(Model model) {
 		return "example";
 	}
-	
-	/*
-	  Your code goes here.
-	  
-	  -Rian
-	*/
+
+	@GetMapping("/lowongan/ubah/{idLowongan}")
+	public String changeLowonganFormPage(
+			@PathVariable Long idLowongan,
+			Model model
+	){
+
+		LowonganModel lowongan = lowonganService.getLowonganById(idLowongan);
+		if (lowongan == null){
+			return "lowongan-error";
+		} else {
+			model.addAttribute("lowongan", lowongan);
+			List<UserModel> listUser = userService.findAll();
+			List<JenisLowonganModel> listJenis = jenisLowonganService.findAll();
+			model.addAttribute("listJenis", listJenis);
+			model.addAttribute("listUser", listUser);
+			return "update-lowongan-form";
+		}
+	}
+
+	@PostMapping("/lowongan/ubah")
+	public String changeLowonganFormSubmit(
+
+			@ModelAttribute LowonganModel lowongan,
+			Model model
+	){
+		if (lowongan.getDivisi()== null || lowongan.getPosisi() == null || lowongan.getJenisLowongan() == null){
+			LowonganModel lowonganUpdated = lowonganService.updateLowonganVer2(lowongan);
+			model.addAttribute("lowonganUpdated", lowonganUpdated);
+		} else {
+			LowonganModel lowonganUpdated = lowonganService.updateLowongan(lowongan);
+			String newCode = lowonganService.getKode(lowonganUpdated);
+			lowonganUpdated.setKodeLowongan(newCode);
+			lowonganDb.save(lowonganUpdated);
+			model.addAttribute("lowonganUpdated", lowonganUpdated);
+		}
+
+		return "update-lowongan";
+
+	}
 	
 
 }
