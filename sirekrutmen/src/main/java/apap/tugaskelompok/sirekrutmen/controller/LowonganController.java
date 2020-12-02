@@ -39,10 +39,6 @@ public class LowonganController {
 	@Autowired
 	LowonganDb lowonganDb;
 	
-	@GetMapping("/home")
-	private String home(Model model) {
-		return "home";
-	}
 
 	@RequestMapping("/lowongan")
 	public String listLowongan(Model model){

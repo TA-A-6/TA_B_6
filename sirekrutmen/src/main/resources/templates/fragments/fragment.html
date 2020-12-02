@@ -20,6 +20,7 @@
 		<script th:src="@{/js/style.js}"></script>
 		
 	</head>
+	
 </head>
 <div class="container-fluid">
 
@@ -35,6 +36,7 @@
 				<li><a id="len1" class="hoverable" href="#">Lowongan</a></li>
 				<li><a id="len2" class="hoverable" href="#">Pelamar</a></li>
 				<li><a id="len3" class="hoverable" href="#">Pengguna</a></li>
+				<li sec:authorize="isAuthenticated()" ><a id="len4" class="text-right hoverable" th:href="@{/logout}">Logout</a></li>
 			</ul>
 	</div>
 </nav>
