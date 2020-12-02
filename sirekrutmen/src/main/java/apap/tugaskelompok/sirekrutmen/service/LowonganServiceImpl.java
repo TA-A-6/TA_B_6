@@ -86,9 +86,15 @@ public class LowonganServiceImpl implements LowonganService{
 
 		return kode;
 
+	}
+	
+	@Override
 	public List<LowonganModel> getListLowongan() {
 		return lowonganDb.findAll();
 
+	}
+	
+	@Override
 	public List<PelamarModel> getDaftarPelamar(LowonganModel lowongan) {
 		List<PelamarModel> pelamar = new ArrayList<PelamarModel>();
 

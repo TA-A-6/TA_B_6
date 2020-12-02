@@ -48,11 +48,16 @@ public class PelamarModel implements Serializable {
 	@Column(name="alamat", nullable=false)
 	private String alamat;
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name= "userId", referencedColumnName = "uuid", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnore
+//	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+//	@JoinColumn(name= "userId", referencedColumnName = "uuid", nullable = false)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@JsonIgnore
+//	private UserModel user;
+	
+	@OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name="user_id", referencedColumnName ="uuid")
 	private UserModel user;
+	
 	
 	@OneToMany(mappedBy = "pelamar", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<LamaranModel> listLamaran;

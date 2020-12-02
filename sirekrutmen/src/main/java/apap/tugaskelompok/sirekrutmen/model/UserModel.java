@@ -48,8 +48,11 @@ public class UserModel implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<LowonganModel> listLowongan;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<PelamarModel> listPelamar;
+//	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    private List<PelamarModel> listPelamar;
+	
+	@OneToOne(mappedBy= "user")
+	private PelamarModel pelamar;
 
 	public String getUsername() {
 		return username;
@@ -91,12 +94,12 @@ public class UserModel implements Serializable{
 		this.listLowongan = listLowongan;
 	}
 
-	public List<PelamarModel> getListPelamar() {
-		return listPelamar;
+	public PelamarModel getPelamar() {
+		return pelamar;
 	}
 
-	public void setListPelamar(List<PelamarModel> listPelamar) {
-		this.listPelamar = listPelamar;
+	public void setPelamar(PelamarModel pelamar) {
+		this.pelamar = pelamar;
 	}
     
 	
