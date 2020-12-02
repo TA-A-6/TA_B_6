@@ -7,6 +7,7 @@ import apap.tugaskelompok.sirekrutmen.model.UserModel;
 import apap.tugaskelompok.sirekrutmen.repository.UserDb;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -25,4 +26,8 @@ public class UserServiceImpl implements UserService{
 		
 		return userDb.findByUsername(username);
 	}
+
+	@Override
+	public List<UserModel> findAll(){return userDb.findAll();}
+
 }
