@@ -9,27 +9,17 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text="'Hello '+${#httpServletRequest.remoteUser}+'!'" style="color: black">Login as</h2>
+    
     <div class="container-fluid">
-        <div class="bg-dark text-center" style="height: 110px; width: 600px; border-radius: 10px; font-size: 40px; margin:auto; margin-top: 150px">
-            <a style="color: white; margin:auto">Selamat Datang di SIREKRUTMEN!</a>
-        </div>
+    	<img th:src="@{/images/sirekrutmen.png}" class="img-fluid" alt="Join SIREKRUTMEN">
+    
+   		<h1 class="greetings">Selamat Datang <br> di SI-REKRUTMEN,</h1>
+   		<h1 class="the-user" th:text ="${#strings.toUpperCase(#authentication.getPrincipal().getUsername())} + '!'">Loggin as</h1>
+   		
+   		<button class="btn btn-primary btn-lowongan"> CARI LOWONGAN</button>
+    		
+    
     </div>
-    <div style="margin: 20px 100px 0px 100px ">
-        <table class="table table-borderless" style="width: 600px; margin: auto">
-            <thead>
-            <div class="text-center"><a style="font-size: 30px; color: #152238"><b>Daftar Fitur:</b></a></div>
-            </thead>
-            <thead>
-            <tr>
-                <th><a th:href="@{/}" class="text-center btn btn-dark" style="margin: auto">Daftar Lowongan</a></th>
-                <th><a th:href="@{/}" class="text-center btn btn-dark" style="margin: auto">Membuat Lamaran</a></th>
-                <th><a th:href="@{/}" class="text-center btn btn-dark" style="margin: auto">Informasi Pendaftar</a></th>
-
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <hr>
+    
 </body>
 </html>
