@@ -3,7 +3,7 @@
     backface-visibility: hidden;
     vertical-align: middle;
     position: relative;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    /* box-shadow: 0 0 1px rgba(0, 0, 0, 0); */
     tranform: translateZ(0);
     transition-duration: .3s;
     transition-property: transform;
@@ -19,9 +19,9 @@
     height: 10px;
     width: 90%;
     opacity: 0;
-    background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
+    /* background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
-    /* W3C */
+     */ 
     transition-duration: 0.3s;
     transition-property: transform, opacity;
 }
@@ -34,6 +34,7 @@
     opacity: 1;
     transform: translateY(-5px);
 }
+
 
 @keyframes bounce-animation {
     16.65% {
@@ -103,4 +104,38 @@ nav li a {
 .len{
     width: 10%;
     margin: 0px 10px 0px 0px;
+}
+
+
+.greetings {
+	position: absolute;
+	top: 150px;
+	left: 90px;
+	font-size: 70px;
+	color: #1A121B;
+	font-weight: bold;
+	text-shadow: 2px 2px 5px grey;
+	
+}
+
+.the-user {
+	position: absolute;
+	top: 330px;
+	left: 90px;
+	font-size: 70px;
+	color: #F2A223;
+	text-shadow: 2px 2px 5px grey;
+}
+
+.btn-lowongan {
+	position: absolute;
+	top: 480px;
+	left: 90px;
+	background-color: #2D435B;
+	padding: 5px 50px;
+	border-radius: 50px;
+	font-size: 30px;
+	font-weight: bold;
+	
+	
 }
