@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Add Lowongan </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+
+</head>
+
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Tambah Data Lowongan</div>
+                    <div class="card-body">
+                        <form th:action="@{/lowongan/add}" th:object="${lowongan}" method="POST">
+                            <input type="hidden" th:field="*{idLowongan}"/>
+
+                            <label>Divisi</label>
+                            <input type="text" name="divisi" th:value="*{divisi}" class="form-control"/>
+
+                            <label>Posisi</label>
+                            <input type="text" name="posisi" th:value="*{posisi}" class="form-control"/>
+
+                            <label>Jenis Lowongan</label>
+                            <select name="jenisLowongan" class="form-control">
+                                <option selected value=""> -- Pilih Jenis Lowongan -- </option>
+                                <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenisLowongan}" th:text="${jenis.nama}"></option>
+                            </select>
+
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlah" th:value="*{jumlah}" class="form-control"/>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
