@@ -7,6 +7,7 @@ import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
 import apap.tugaskelompok.sirekrutmen.repository.LamaranDb;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -19,12 +20,19 @@ public class LamaranServiceImpl implements LamaranService{
 		
 		return lamaranDb.findById(idLamaran).get();
 	}
-	
-	
+
+	@Override
+	public List<LamaranModel> getLamaranByStatus(Integer status){
+		return lamaranDb.findAllByStatus(status);
+	}
 	/*
 	  Your code goes here.
 	  Jangan lupa isi dulu interface nya sebelum ngoding disini
 	  
 	  -Rian
 	 */
+	@Override
+	public List<LamaranModel> getStatus(int status){
+		return lamaranDb.findAllByStatus(status);
+	}
 }
