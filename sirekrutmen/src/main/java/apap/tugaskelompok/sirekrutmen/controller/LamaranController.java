@@ -55,8 +55,10 @@ public class LamaranController {
 		LowonganModel lowonganLamaran = lamaranUpdated.getLowongan();
 		int kapasitas = lowonganLamaran.getJumlah();
 		int jumlahLamaran = lamaranService.getLamaranByLowonganAndStatus(lowonganLamaran,2).size();
+		boolean cukup = false;
 
 		if (jumlahLamaran == kapasitas){
+			cukup = true;
 			PelatihanDetail pelatihanDetail = new PelatihanDetail();
 			pelatihanDetail.setNamaPelatihan("Pelatihan" + lowonganLamaran.getPosisi());
 			pelatihanDetail.setDeskripsi("Pelatihan untuk para pelamar dari lowongan" + lowonganLamaran.getPosisi());
@@ -82,7 +84,9 @@ public class LamaranController {
 			pelatihanDetail.setWaktuSelesai(dateWaktuSelesai);
 			lamaranRestService.postLamaran(pelatihanDetail);
 		}
+		model.addAttribute("cukup", cukup);
 		model.addAttribute("lamaran", lamaranUpdated);
+		System.out.println(cukup);
 		return "update-lamaran";
 	}
 

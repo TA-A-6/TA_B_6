@@ -1,5 +1,6 @@
 package apap.tugaskelompok.sirekrutmen.service;
 
+import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 

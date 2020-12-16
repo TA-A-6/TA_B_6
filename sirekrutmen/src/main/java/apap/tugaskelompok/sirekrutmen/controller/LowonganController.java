@@ -1,14 +1,11 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
-import apap.tugaskelompok.sirekrutmen.model.JenisLowonganModel;
-import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
-import apap.tugaskelompok.sirekrutmen.model.UserModel;
+import apap.tugaskelompok.sirekrutmen.model.*;
 import apap.tugaskelompok.sirekrutmen.repository.LowonganDb;
 import apap.tugaskelompok.sirekrutmen.service.JenisLowonganService;
 import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
-import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +94,8 @@ public class LowonganController {
 	){
 		LowonganModel lowongan = lowonganService.getLowonganById(id);
 		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
+
+
 		model.addAttribute("lowongan",lowongan);
 		model.addAttribute("pelamar",daftarPelamar);
 		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());
