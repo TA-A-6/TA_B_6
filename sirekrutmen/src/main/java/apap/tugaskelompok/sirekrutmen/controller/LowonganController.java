@@ -88,7 +88,6 @@ public class LowonganController {
 		return "update-lowongan";
 
 	}
-	
 
 	
 	@GetMapping("/lowongan/detail/{id}")
