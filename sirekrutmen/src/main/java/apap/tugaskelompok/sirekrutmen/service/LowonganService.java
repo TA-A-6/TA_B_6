@@ -15,5 +15,6 @@ public interface LowonganService {
 	String getKode(LowonganModel lowongan);
 	List<LowonganModel> getListLowongan();
 	List<PelamarModel> getDaftarPelamar(LowonganModel lowongan);
+	String getKodeRest (LowonganModel lowongan, Long idJenis);
 
 }

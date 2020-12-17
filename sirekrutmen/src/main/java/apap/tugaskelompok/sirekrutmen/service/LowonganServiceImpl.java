@@ -87,6 +87,23 @@ public class LowonganServiceImpl implements LowonganService{
 		return kode;
 
 	}
+
+	@Override
+	public String getKodeRest (LowonganModel lowongan, Long idJenis){
+
+		String kode = lowongan.getDivisi().substring(0,2).toUpperCase() + "-" +
+				lowongan.getPosisi().substring(0,2).toUpperCase() + "-" + "0" +
+				idJenis.toString() + "-";
+
+		Random rand = new Random();
+		int upperbond = 99;
+		int int_random = rand.nextInt(upperbond);
+
+		kode = kode + Integer.toString(int_random);
+
+		return kode;
+
+	}
 	
 	@Override
 	public List<LowonganModel> getListLowongan() {
