@@ -30,16 +30,15 @@ public class PelamarRestController {
 
 
 	@RequestMapping(value = "/pelamar")
-	private List<LamaranModel> listLamaran(Model model) {
+	private List<PelamarModel> listLamaran(Model model) {
 
 		try{
 			int diterima=3;
 			List<LamaranModel>  listLamaran = lamaranRestService.getStatus(diterima);
-//			List<PelamarModel> listPelamar = pelamarRestService.getDaftarPelamar();
 
-			List<PelamarModel> listPelamar = pelamarRestService.getPelamarInListLamaran(listLamaran);
+			List<PelamarModel> listPelamar = pelamarRestService.getPelamarInLamaranModel(listLamaran);
 
-			return listLamaran;
+			return listPelamar;
 		}catch (NoSuchElementException e){
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND,"List Pelamar Not Found"

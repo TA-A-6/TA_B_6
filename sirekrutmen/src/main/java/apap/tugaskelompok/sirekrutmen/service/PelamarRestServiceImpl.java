@@ -37,9 +37,9 @@ public class PelamarRestServiceImpl implements PelamarRestService{
 	}
 
 	@Override
-	public List<PelamarModel> getPelamarInListLamaran(List<LamaranModel> lamaran){
+	public List<PelamarModel> getPelamarInLamaranModel(List<LamaranModel> lamaran){
 		List<PelamarModel> listDiterima=new ArrayList<PelamarModel>();
-		for(int i=0;i<lamaran.size();i++){
+		for (int i = 0; i <= lamaran.size()-1; i++) {
 			listDiterima.add(lamaran.get(i).getPelamar());
 		}
 		return listDiterima;

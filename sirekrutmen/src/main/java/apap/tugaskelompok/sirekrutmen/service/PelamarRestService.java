@@ -15,5 +15,5 @@ public interface PelamarRestService {
 
 	List<PelamarModel> getDaftarPelamar();
 
-	List<PelamarModel> getPelamarInListLamaran(List<LamaranModel> lamaran);
+	List<PelamarModel> getPelamarInLamaranModel(List<LamaranModel> lamaran);
 }
