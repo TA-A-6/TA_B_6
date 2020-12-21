@@ -38,7 +38,7 @@
                 <td th:text="${lowongan.kodeLowongan}"></td>
                 <td th:text="${lowongan.divisi}"></td>
                 <td th:text="${lowongan.posisi}"></td>
-                <td th:text="${lowongan.jenisLowongan}"></td>
+                <td th:text="${lowongan.jenisLowongan.nama}"></td>
                 <td th:text="${lowongan.jumlah}"></td>
                 <td>
                     <a th:href="@{/lowongan/detail/}+${lowongan.idLowongan}" class="btn btn-info">Detail</a>
