@@ -45,18 +45,25 @@
                 <td>Jumlah</td>
                 <td th:text="': '+${lowongan.jumlah}"></td>
             </tr>
-            <tr>
+            <tr th:if="${!role.equals('Pelamar')}">
                 <td>Daftar Pelamar</td>
                 <td>:</td>
             </tr>
-            <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
+            <tr th:each="pelamarNama, iterationStatus : ${pelamar}" th:if="${!role.equals('Pelamar')}">
                 <td></td>
                 <td th:text="' '+${iterationStatus.count}+'. '+${pelamarNama.nama}"></td>
             </tr>
-            <tr>
+            <tr th:if="${role.equals('Kepala Departemen HR') || role.equals('Kepala Bagian')}">
                 <td></td>
                 <td>
-                    <a class="btn btn-outline-primary">Hapus</a>
+                    <a class="btn btn-primary" th:href="@{/lowongan/ubah/}+${lowongan.idLowongan}">Ubah</a>
+                    <a class="btn btn-danger" th:href="@{/lowongan/hapus/}+${lowongan.idLowongan}">Hapus</a>
+                </td>
+            </tr>
+            <tr th:if="${role.equals('Pelamar')}">
+                <td></td>
+                <td>
+                    <a class="btn btn-primary">Lamar</a>
                 </td>
             </tr>
             </tbody>
