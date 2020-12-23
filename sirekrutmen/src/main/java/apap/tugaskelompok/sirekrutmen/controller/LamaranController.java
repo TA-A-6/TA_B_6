@@ -90,5 +90,23 @@ public class LamaranController {
 		return "update-lamaran";
 	}
 
+    @GetMapping(value = "/lamaran/hapus/{idLamaran}")
+    public String deleteLamaran(
+            @PathVariable(value = "idLamaran") Long idLamaran,
+            Model model){
+
+        LamaranModel lamaran = lamaranService.getLamaranById(idLamaran);
+
+        if (lamaran.getStatus() == 3){
+            lamaranService.deleteLamaran(lamaran);
+            model.addAttribute("lamaran", lamaran);
+
+            return "delete-lamaran";
+        }else {
+            return "delete-handling-lamaran";
+        }
+
+    }
+
 	
 }

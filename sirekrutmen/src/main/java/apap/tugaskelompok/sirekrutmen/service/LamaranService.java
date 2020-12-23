@@ -9,4 +9,5 @@ public interface LamaranService {
 	LamaranModel getLamaranById(Long idLamaran);
 	LamaranModel ubahStatusLamaran(LamaranModel lamaran);
 	List<LamaranModel> getLamaranByLowonganAndStatus(LowonganModel lowongan, Integer status);
+	LamaranModel deleteLamaran(LamaranModel lamaran);
 }

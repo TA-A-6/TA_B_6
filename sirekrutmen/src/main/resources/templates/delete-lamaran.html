@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Hapus Lamaran </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h2 th:text="'Lamaran dengan id ' + ${idLamaran} + ' berhasil di hapus. '"></h2>
+<a href="/lowongan">Kembali</a>
+</body>
+</html>

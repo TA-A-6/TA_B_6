@@ -35,4 +35,10 @@ public class LamaranServiceImpl implements LamaranService{
 	public List<LamaranModel> getLamaranByLowonganAndStatus(LowonganModel lowongan, Integer status) {
 		return lamaranDb.findLamaranByLowonganAndStatus(lowongan, 2);
 	}
+
+	@Override
+	public LamaranModel deleteLamaran(LamaranModel lamaran) {
+		lamaranDb.delete(lamaran);
+		return lamaran;
+	}
 }
