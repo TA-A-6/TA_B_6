@@ -48,6 +48,31 @@ public class LowonganController {
 		return "viewall-lowongan";
 	}
 
+
+	@GetMapping("/lowongan/add")
+	public String addLowonganFormPage(Model model){
+		model.addAttribute("lowongan", new LowonganModel());
+		List<JenisLowonganModel> listJenis = jenisLowonganService.findAll();
+		model.addAttribute("listJenis", listJenis);
+		return "form-add-lowongan";
+	}
+
+	@PostMapping("/lowongan/add")
+	public String addLowonganSubmit(
+			@ModelAttribute LowonganModel lowongan,
+			Model model){
+		String code = lowonganService.getKode(lowongan);
+		lowongan.setKodeLowongan(code);
+
+		lowongan.setUser(userService.getUserByUsername(userService.getUserUsername()));
+
+		lowonganDb.save(lowongan);
+
+		model.addAttribute("lowongan", lowongan);
+		return "add-lowongan";
+	}
+
+
 	@GetMapping("/lowongan/ubah/{idLowongan}")
 	public String changeLowonganFormPage(
 			@PathVariable Long idLowongan,

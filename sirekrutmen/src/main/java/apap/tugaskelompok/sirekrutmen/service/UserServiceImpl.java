@@ -1,6 +1,9 @@
 package apap.tugaskelompok.sirekrutmen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,16 @@ public class UserServiceImpl implements UserService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
 		return hashedPassword;
+	}
+
+	@Override
+	public String getUserUsername(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)){
+			String currentUserName = ((Authentication) authentication).getName();
+			return currentUserName;
+		}
+		return null;
 	}
 
 }

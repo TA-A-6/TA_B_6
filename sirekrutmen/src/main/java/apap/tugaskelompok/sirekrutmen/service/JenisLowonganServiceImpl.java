@@ -18,4 +18,9 @@ public class JenisLowonganServiceImpl implements JenisLowonganService {
     @Override
     public List<JenisLowonganModel> findAll(){return jenisLowonganDb.findAll();}
 
+    @Override
+    public JenisLowonganModel getJenisLowonganById (Long id){
+        return jenisLowonganDb.findById(id).get();
+    }
+
 }
