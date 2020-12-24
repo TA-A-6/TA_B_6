@@ -1,10 +1,12 @@
 package apap.tugaskelompok.sirekrutmen.restcontroller;
 
+import apap.tugaskelompok.sirekrutmen.rest.PelatihanDetail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import apap.tugaskelompok.sirekrutmen.service.LamaranRestService;
+import reactor.core.publisher.Mono;
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -13,8 +15,11 @@ public class LamaranRestController {
 	@Autowired
 	LamaranRestService lamaranRestService;
 
-	/*your code goes here
-	
-	make sure routing-nya pake /lamaran dulu depannya. e.g. /lamaran/{id}.*/
+
+	@GetMapping(value = "/pelatihan/dari/lamaran")
+	private Mono<String> lamaranPelatihan(PelatihanDetail pelatihanDetail){
+		return lamaranRestService.postLamaran(pelatihanDetail);
+	}
+
 	
 }

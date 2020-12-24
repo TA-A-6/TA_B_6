@@ -112,7 +112,6 @@ public class LowonganController {
 		return "update-lowongan";
 
 	}
-	
 
 	
 	@GetMapping("/lowongan/detail/{id}")
@@ -125,6 +124,8 @@ public class LowonganController {
 		model.addAttribute("role",role);
 		LowonganModel lowongan = lowonganService.getLowonganById(id);
 		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
+
+
 		model.addAttribute("lowongan",lowongan);
 		model.addAttribute("pelamar",daftarPelamar);
 		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());

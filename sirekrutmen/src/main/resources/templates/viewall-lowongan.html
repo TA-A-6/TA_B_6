@@ -20,15 +20,14 @@
         <br>
         <table class="table table-borderless">
             <thead style="background-color: #e3f2fd;
-                        font-size: medium;
-                        text-align: center;">
+                        font-size: medium;">
             <tr>
                 <th>No</th>
                 <th>Kode Lowongan</th>
                 <th>Divisi</th>
                 <th>Posisi</th>
                 <th>Jenis Lowongan</th>
-                <th>Jumlah</th>
+                <th>Jumlah Lowongan</th>
                 <th>Aksi</th>
             </tr>
             </thead>
@@ -42,7 +41,7 @@
                 <td th:text="${lowongan.jumlah}"></td>
                 <td>
                     <a th:href="@{/lowongan/detail/}+${lowongan.idLowongan}" class="btn btn-info">Detail</a>
-                    <a th:href="@{/pelamar/tambah/}" class="btn btn-primary">Lamar</a>
+                    <a th:href="@{/pelamar/tambah/}+${lowongan.idLowongan}" class="btn btn-primary">Melamar</a>
                 </td>
             </tr>
             </tbody>
