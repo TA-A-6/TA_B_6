@@ -32,7 +32,7 @@ public class PelamarController {
 	LamaranService lamaranService;
 
 	@RequestMapping("/pelamar")
-	public String listLowongan(Model model) {
+	public String listLamaran(Model model) {
 		int diterima= 3;
 
 		List<PelamarModel> listPelamar = pelamarService.getDaftarPelamar();

@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	@Override
+	public String getRoleByUsername(String username){
+		return userDb.findAllByUsername(username);
+	}
+
 }

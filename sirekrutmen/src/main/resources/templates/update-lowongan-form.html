@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">Change Data Lowongan</div>
                         <div class="card-body">
-                            <form th:action="@{/lowongan/ubah}" th:object="${lowongan}" method="POST">
+                            <form th:action="@{/lamaran/ubah}" th:object="${lamaran}" method="POST">
                                 <input type="hidden" th:field="*{idLowongan}"/>
 
                                 <label>Divisi</label>
@@ -46,10 +46,6 @@
                                     <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.uuid}"></option>
                                 </select>
 
-                                <label>Jumlah</label>
-                                <input type="number" name="jumlah" th:value="*{jumlah}" class="form-control"/>
-
-                                <br>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
