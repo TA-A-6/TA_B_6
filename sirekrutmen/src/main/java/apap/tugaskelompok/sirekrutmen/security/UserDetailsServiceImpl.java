@@ -1,10 +1,12 @@
 package apap.tugaskelompok.sirekrutmen.security;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -33,5 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
 	}
+
+
 	
 }
