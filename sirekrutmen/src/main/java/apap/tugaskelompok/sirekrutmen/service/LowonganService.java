@@ -1,5 +1,6 @@
 package apap.tugaskelompok.sirekrutmen.service;
 
+import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 
@@ -15,5 +16,5 @@ public interface LowonganService {
 	String getKode(LowonganModel lowongan);
 	List<LowonganModel> getListLowongan();
 	List<PelamarModel> getDaftarPelamar(LowonganModel lowongan);
-
+	void deteleLowongan(LowonganModel lowongan);
 }

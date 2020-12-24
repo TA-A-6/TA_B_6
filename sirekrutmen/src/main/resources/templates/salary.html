@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Salary Statistic </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="card align-content-center justify-content-center"
+         style="width: 350px;
+         margin: auto;
+         margin-top: 30px;
+         margin-bottom: 10px;">
+        <div class="header" style="text-align: center"><h3>Statistik Gaji</h3></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Gaji</th>
+                <th>Lama Bekerja</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="gaji, iterStat : ${gaji}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${pegawai[__${iterStat.index}__]}"></td>
+                <td th:text="'Rp'+${gaji.gajiPokok}"></td>
+                <td th:text="${lamaKerja[__${iterStat.index}__]}+' tahun'"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Rata-rata gaji :</td>
+                <td th:text="'Rp'+${rata}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
