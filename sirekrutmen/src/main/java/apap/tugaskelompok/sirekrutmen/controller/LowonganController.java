@@ -6,6 +6,7 @@ import apap.tugaskelompok.sirekrutmen.service.JenisLowonganService;
 import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import apap.tugaskelompok.sirekrutmen.service.LowonganService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -115,8 +117,11 @@ public class LowonganController {
 	@GetMapping("/lowongan/detail/{id}")
 	public String detailLowongan(
 			@PathVariable(value="id") Long id,
-			Model model
+			Model model,
+			Authentication auth
 	){
+		String role = userService.getUserByUsername(auth.getName()).getRole().getNama();
+		model.addAttribute("role",role);
 		LowonganModel lowongan = lowonganService.getLowonganById(id);
 		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
 
@@ -125,6 +130,31 @@ public class LowonganController {
 		model.addAttribute("pelamar",daftarPelamar);
 		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());
 		return "view-detail-lowongan";
+	}
+
+	@RequestMapping("/lowongan/hapus/{id}")
+	public String deleteLowongan(
+			@PathVariable(value="id") Long id,
+			RedirectAttributes redir
+	){
+		LowonganModel lowongan = lowonganService.getLowonganById(id);
+		List<LamaranModel> daftarLamaran = lowongan.getListLamaran();
+		Boolean statusLamaran = true;
+		for (int i = 0; i < daftarLamaran.size(); i++){
+			if(daftarLamaran.get(i).getStatus()==1 || daftarLamaran.get(i).getStatus()==0){
+				statusLamaran = false;
+			}
+		}
+		if(statusLamaran){
+			lowonganService.deteleLowongan(lowongan);
+			redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan() + " berhasil dihapus.");
+			redir.addFlashAttribute("type", "alert-success");
+		}else{
+			redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan()+" masih memiliki pelamar dengan status melamar atau wawancara");
+			redir.addFlashAttribute("type", "alert-danger");
+		}
+		return "redirect:/lowongan";
+
 	}
 
 

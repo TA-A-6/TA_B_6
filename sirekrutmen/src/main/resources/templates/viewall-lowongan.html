@@ -14,6 +14,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <div class="container-fluid">
+        <div th:id="${msg}" id="alert" class="alert d-flex justify-content-center" th:text="${msg}" th:classappend="${type}"></div>
         <br>
         <h2 style="text-align: center;">Daftar Lowongan</h2>
         <br>
