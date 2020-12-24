@@ -124,4 +124,8 @@ public class LowonganServiceImpl implements LowonganService{
 
 	}
 
+	@Override
+	public void deteleLowongan(LowonganModel lowongan) {
+		lowonganDb.deleteById(lowongan.getIdLowongan());
+	}
 }
