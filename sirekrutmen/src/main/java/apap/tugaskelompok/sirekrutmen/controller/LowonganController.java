@@ -115,7 +115,7 @@ public class LowonganController {
 		List<LamaranModel> daftarLamaran = lowongan.getListLamaran();
 		Boolean statusLamaran = true;
 		for (int i = 0; i < daftarLamaran.size(); i++){
-			if(daftarLamaran.get(i).getStatus()==1 || daftarLamaran.get(i).getStatus()==2){
+			if(daftarLamaran.get(i).getStatus()==1 || daftarLamaran.get(i).getStatus()==0){
 				statusLamaran = false;
 			}
 		}
