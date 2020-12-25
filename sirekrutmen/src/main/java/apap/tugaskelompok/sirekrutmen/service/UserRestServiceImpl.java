@@ -1,7 +1,5 @@
 package apap.tugaskelompok.sirekrutmen.service;
 
-import java.sql.Date;
-
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,15 +8,11 @@ import apap.tugaskelompok.sirekrutmen.rest.BaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.PegawaiDetail;
 import apap.tugaskelompok.sirekrutmen.rest.GajiBaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.PegawaiBaseResponse;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @Transactional
 public class UserRestServiceImpl implements UserRestService{
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public BaseResponse postUserToSipegawai(PegawaiDetail pegawai) {
 
@@ -37,7 +31,7 @@ public class UserRestServiceImpl implements UserRestService{
 
 	@Override
 	public PegawaiBaseResponse getDataPegawai(String userName) {
-		String endPoint = "https://si-pegawai.herokuapp.com/api/v1/pegawai/"+userName;
+		String endPoint = "https://si-pegawai.herokuapp.com/api/v1/pegawai/" + userName;
 		WebClient webClient = WebClient.builder().baseUrl(endPoint).build();
 		return webClient.get()
 				.uri(uriBuilder -> uriBuilder.build())

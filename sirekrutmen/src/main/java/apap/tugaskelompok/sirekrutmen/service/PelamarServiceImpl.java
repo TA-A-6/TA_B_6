@@ -44,6 +44,8 @@ public class PelamarServiceImpl implements PelamarService{
 			return false;
 		}
 		
+	}
+		
 	public List<PelamarModel> getDaftarPelamar(){
 		return pelamarDb.findAll();
 	}

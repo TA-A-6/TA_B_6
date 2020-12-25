@@ -3,12 +3,10 @@ package apap.tugaskelompok.sirekrutmen.controller;
 import apap.tugaskelompok.sirekrutmen.rest.PegawaiBaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.GajiBaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.GajiDetails;
-import apap.tugaskelompok.sirekrutmen.rest.PegawaiDetails;
 import apap.tugaskelompok.sirekrutmen.service.UserRestService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
-import java.sql.Date;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,10 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import apap.tugaskelompok.sirekrutmen.model.RoleModel;
 import apap.tugaskelompok.sirekrutmen.model.UserModel;
 import apap.tugaskelompok.sirekrutmen.repository.RoleDb;
 import apap.tugaskelompok.sirekrutmen.rest.PegawaiDetail;
-import apap.tugaskelompok.sirekrutmen.service.UserRestService;
 import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 
@@ -45,10 +43,7 @@ public class UserController {
 	@Autowired
 	private UserRestService userRestService;
 	
-	@Autowired 
-	private UserRestService userRestService;
 	
-//	buat testing doang
 	@RequestMapping("/add/{username}/{password}")
 	public String addUserSubmit(
 			@PathVariable("username") String username,
@@ -121,7 +116,6 @@ public class UserController {
 		
 	}
 	
-=======
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String viewProfile(Model model){
@@ -130,7 +124,7 @@ public class UserController {
 		String username = user.getUsername();
 		Boolean choose = false;
 		try{
-			PegawaiBaseResponse<PegawaiDetails> pegawai = userRestService.getDataPegawai(user.getUsername());
+			PegawaiBaseResponse<PegawaiDetail> pegawai = userRestService.getDataPegawai(user.getUsername());
 			choose = true;
 			model.addAttribute("pegawai", pegawai.getResult());
 //			model.addAttribute("role", pegawai.getResult().getRoleName());
