@@ -14,4 +14,5 @@ public interface PelamarDb extends JpaRepository<PelamarModel, Long> {
 
 	List<PelamarModel> findAllByIdPelamar(Integer pelamarid);
 	
+	PelamarModel findByUser_Uuid(String uuid);
 }
