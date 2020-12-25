@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -22,8 +22,11 @@
                     <form th:action="@{/lamaran/ubah}" th:object="${lamaran}" method="POST">
                         <input class="form-control" type="hidden" th:field="*{idLamaran}"/>
                         <label><h2>Status</h2></label>
-                        <select class="form-control" name="status" th:field="*{status}">
+                        <select class="form-control" name="status" th:field="*{status}" sec:authorize="hasAuthority('Staff Rekrutmen')">
                             <option value="0">Melamar</option>
+                            <option value="1">Wawancara</option>
+                        </select>
+                        <select class="form-control" name="status" th:field="*{status}" sec:authorize="hasAuthority('Kepala Bagian')">
                             <option value="1">Wawancara</option>
                             <option value="2">Diterima</option>
                             <option value="3">Ditolak</option>
