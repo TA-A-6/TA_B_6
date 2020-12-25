@@ -67,7 +67,7 @@ public class PelamarController {
 
 	@RequestMapping("/pelamar")
 	public String listLamaran(Model model) {
-		int diterima= 3;
+		int diterima= 2;
 
 		List<PelamarModel> listPelamar = pelamarService.getDaftarPelamar();
 		List<LamaranModel> listLamaran = lamaranService.getStatus(diterima);

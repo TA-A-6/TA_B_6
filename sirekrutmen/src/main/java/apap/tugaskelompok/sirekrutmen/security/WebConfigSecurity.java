@@ -20,6 +20,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 			.antMatchers("/css/**").permitAll()
+			.antMatchers("/api/v1/**").permitAll()
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/images/**").permitAll()
 			.antMatchers("/lowongan/detail/**").hasAnyAuthority("Pelamar","Kepala Bagian","Kepala Departemen HR", "Staff Rekrutmen")
