@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Info Pelamar</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container">
+	<h2 class="text-center">Form Update Pelamar</h2>
+       
+        <div class="card-body">
+            <form th:action="@{/pelamar/update}" th:object="${pelamar}" method="POST">
+            
+            	<input type="hidden" name="idPelamar" th:value="*{idPelamar}" >
+                <label>Nama</label>
+                <input type="text" name="nama" th:value="*{nama}" class="form-control">
+                <br>
+
+                <label>No Telepon</label>
+                <input type="number" name="noTelepon" th:value="*{noTelepon}" class="form-control">
+                <br>
+
+                <label>Tempat Lahir</label>
+                <input type="text" name="tempatLahir" th:value="*{tempatLahir}" class="form-control">
+                <br>
+
+                <label>Tanggal Lahir</label>
+                <input type="date" name="tanggalLahir" th:value="${#dates.format(pelamar.tanggalLahir, 'yyyy-MM-dd')}" class="form-control">
+                <br>
+
+                <label>Alamat</label>
+                <input type="text" name="alamat" th:value="*{alamat}" class="form-control">
+                <br>
+                
+
+                <div class="text-right">
+                	<button class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+	
+		 </div>
+	
+	</div>
+	
+</body>
+</html>

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PelamarService {
 	PelamarModel getPelamarById(Long idPelamar);
+	Boolean updatePelamar(PelamarModel pelamar);
 
 	List<PelamarModel> getDaftarPelamar();
 
