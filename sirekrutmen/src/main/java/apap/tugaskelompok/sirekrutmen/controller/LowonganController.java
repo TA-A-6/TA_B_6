@@ -7,6 +7,7 @@ import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import apap.tugaskelompok.sirekrutmen.service.LowonganService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,8 +44,18 @@ public class LowonganController {
 	@RequestMapping("/lowongan")
 	public String listLowongan(Model model){
 
+		UserModel user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
 		List<LowonganModel> listLowongan = lowonganService.getListLowongan();
 
+		List<LowonganModel> listLowonganPJ = new ArrayList<LowonganModel>();
+		for (int i = 0; i < listLowongan.size(); i++) {
+			if(listLowongan.get(i).getUser().equals(user)){
+				listLowonganPJ.add(listLowongan.get(i));
+			}
+		}
+
+		model.addAttribute("listLowonganPJ", listLowonganPJ);
 		model.addAttribute("listLowongan", listLowongan);
 		return "viewall-lowongan";
 	}
