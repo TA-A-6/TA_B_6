@@ -40,9 +40,13 @@ public class LowonganController {
 	
 
 	@RequestMapping("/lowongan")
-	public String listLowongan(Model model){
+	public String listLowongan(Model model,
+							   Authentication auth){
 
 		List<LowonganModel> listLowongan = lowonganService.getListLowongan();
+
+		String role = userService.getUserByUsername(auth.getName()).getRole().getNama();
+		model.addAttribute("role",role);
 
 		model.addAttribute("listLowongan", listLowongan);
 		return "viewall-lowongan";
@@ -86,6 +90,7 @@ public class LowonganController {
 			model.addAttribute("lowongan", lowongan);
 			List<UserModel> listUser = userService.findAll();
 			List<JenisLowonganModel> listJenis = jenisLowonganService.findAll();
+			model.addAttribute("size", lowongan.getListLamaran().size());
 			model.addAttribute("listJenis", listJenis);
 			model.addAttribute("listUser", listUser);
 			return "update-lowongan-form";

@@ -18,6 +18,10 @@
         <br>
         <h2 style="text-align: center;">Daftar Lowongan</h2>
         <br>
+        <div th:if="${role.equals('Kepala Departemen HR') || role.equals('Kepala Bagian') || role.equals('Staff Rekrutmen')}">
+            <a class="btn btn-sm btn-primary" th:href="@{/lowongan/add}">+ Tambah Lowongan</a>
+        </div>
+        <br>
         <table class="table table-borderless">
             <thead style="background-color: #e3f2fd;
                         font-size: medium;">
