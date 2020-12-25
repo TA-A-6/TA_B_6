@@ -11,5 +11,7 @@ public interface UserService {
 	
 	UserModel addUser(UserModel user);
 	String encrypt(String password);
+	String getUserUsername ();
+	String getRoleByUsername(String username);
 
 }

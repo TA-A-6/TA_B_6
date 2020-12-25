@@ -7,5 +7,6 @@ import java.util.List;
 public interface JenisLowonganService {
 
     List<JenisLowonganModel> findAll();
+    JenisLowonganModel getJenisLowonganById(Long id);
 
 }

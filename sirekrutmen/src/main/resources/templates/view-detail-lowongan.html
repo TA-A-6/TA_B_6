@@ -14,55 +14,68 @@
 
 
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-
-<div class="container-sm align-items-center justify-content-center">
-    <div class="card align-content-center justify-content-center"
-         style="width: 350px;
-         margin: auto;
-         margin-top: 30px;
-         margin-bottom: 10px;">
-        <div class="header" style="text-align: center"><h3>Detail Lowongan</h3></div>
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-                <td>Kode Lowongan</td>
-                <td th:text="': '+${lowongan.kodeLowongan}"></td>
-            </tr>
-            <tr>
-                <td>Divisi</td>
-                <td th:text="': '+${lowongan.divisi}"></td>
-            </tr>
-            <tr>
-                <td>Posisi</td>
-                <td th:text="': '+${lowongan.posisi}"></td>
-            </tr>
-            <tr>
-                <td>Jenis Lowongan</td>
-                <td th:text="': '+${jenisLowongan}"></td>
-            </tr>
-            <tr>
-                <td>Jumlah</td>
-                <td th:text="': '+${lowongan.jumlah}"></td>
-            </tr>
-            <tr>
-                <td>Daftar Pelamar</td>
-                <td>:</td>
-            </tr>
-            <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
-                <td></td>
-                <td th:text="' '+${iterationStatus.count}+'. '+${pelamarNama.nama}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <a class="btn btn-outline-primary">Hapus</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-sm align-items-center justify-content-center">
+        <div class="card align-content-center justify-content-center"
+             style="width: 350px;
+             margin: auto;
+             margin-top: 30px;
+             margin-bottom: 10px;">
+            <div class="header" style="text-align: center"><h3>Detail Lowongan</h3></div>
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <td>Kode Lowongan</td>
+                    <td th:text="': '+${lowongan.kodeLowongan}"></td>
+                </tr>
+                <tr>
+                    <td>Divisi</td>
+                    <td th:text="': '+${lowongan.divisi}"></td>
+                </tr>
+                <tr>
+                    <td>Posisi</td>
+                    <td th:text="': '+${lowongan.posisi}"></td>
+                </tr>
+                <tr>
+                    <td>Jenis Lowongan</td>
+                    <td th:text="': '+${jenisLowongan}"></td>
+                </tr>
+                <tr>
+                    <td>Jumlah</td>
+                    <td th:text="': '+${lowongan.jumlah}"></td>
+                </tr>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-outline-primary">Hapus</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col">
+                    <div class="header" style="text-align: center"><h5><b>Daftar Pelamar</b></h5></div>
+                    <table class="table table-borderless">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${pelamarNama.nama}"></td>
+                            <td><a th:href="@{/lamaran/ubah-status/}+${pelamarNama.idPelamar}" class="btn btn-info">Status</a></td>
+                            <td><a th:href="@{/lamaran/hapus/}+${pelamarNama.idPelamar}" class="btn btn-danger">Hapus</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
 </body>
 </html>

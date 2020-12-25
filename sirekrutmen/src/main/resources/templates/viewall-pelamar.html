@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Daftar Pelamar </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <br>
+    <h2 style="text-align: center;">Daftar Pelamar</h2>
+    <br>
+    <table class="table table-borderless">
+        <thead style="background-color: #e3f2fd;
+                        font-size: medium;
+                        text-align: center;">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Alamat</th>
+            <th>No Telepon</th>
+            <th>Tanggal Lahir</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="diterima, iterationStatus: ${listDiterima}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${diterima.nama}"></td>
+            <td th:text="${diterima.alamat}"></td>
+            <td th:text="${diterima.noTelepon}"></td>
+            <td th:text="${diterima.tanggalLahir}"></td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

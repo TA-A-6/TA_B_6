@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Ubah Status Lamaran </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-center">
+                        <h2>Ubah Status Lamaran</h2>
+                    </div>
+                    <form th:action="@{/lamaran/ubah}" th:object="${lamaran}" method="POST">
+                        <input class="form-control" type="hidden" th:field="*{idLamaran}"/>
+                        <label><h2>Status</h2></label>
+                        <select class="form-control" name="status" th:field="*{status}">
+                            <option value="0">Melamar</option>
+                            <option value="1">Wawancara</option>
+                            <option value="2">Diterima</option>
+                            <option value="3">Ditolak</option>
+                        </select>
+                        <br>
+                        <div th:if="${cukup}">
+                            <h4 style="color: green;">Pelatihan On Boarding!</h4>
+                        </div>
+                        <br>
+                        <div class="col-sm d-flex justify-content-center">
+                            <button type = "submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

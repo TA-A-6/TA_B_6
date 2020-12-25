@@ -1,5 +1,9 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
+import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
+import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
+import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
+import apap.tugaskelompok.sirekrutmen.service.LamaranService;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,42 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.service.PelamarService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class PelamarController {
-	
+
 	@Autowired
 	PelamarService pelamarService;
-	
-	/*
-	  Your code goes here.
-	  
-	  -Rian
-	*/
-	
-	
-//	@GetMapping("/kamar/update/{noKamar}")
-//	public String updateKamarFormPage(
-//			@PathVariable Long noKamar,
-//			Model model
-//	) {
-//		KamarModel kamar = kamarService.getKamarByNoKamar(noKamar);
-//		model.addAttribute("kamar", kamar);
-//
-//		model.addAttribute("title", "Update Kamar");
-//		return "form-update-kamar";
-//	}
-//	
-//	@PostMapping("/kamar/update")
-//	public String updateKamarFormSubmit(
-//			@ModelAttribute KamarModel kamar,
-//			Model model
-//	) {
-//		kamarService.updateKamar(kamar);
-//		model.addAttribute("kamar", kamar);
-//		return "update-kamar";
-//	}
-	
+
 	
 	@GetMapping("/pelamar/update/{idPelamar}")
 	public String updatePelamarFormPage(
@@ -83,6 +61,24 @@ public class PelamarController {
 		
 		return "update-pelamar-summary";
 	}
-	
 
+	@Autowired
+	LamaranService lamaranService;
+
+	@RequestMapping("/pelamar")
+	public String listLamaran(Model model) {
+		int diterima= 3;
+
+		List<PelamarModel> listPelamar = pelamarService.getDaftarPelamar();
+		List<LamaranModel> listLamaran = lamaranService.getStatus(diterima);
+
+		List<PelamarModel> listDiterima=new ArrayList<PelamarModel>();
+
+		for (int i = 0; i <= listLamaran.size()-1; i++) {
+			listDiterima.add(listLamaran.get(i).getPelamar());
+		}
+
+		model.addAttribute("listDiterima", listDiterima);
+		return "viewall-pelamar";
+	}
 }

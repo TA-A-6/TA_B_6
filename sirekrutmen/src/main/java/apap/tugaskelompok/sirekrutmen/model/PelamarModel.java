@@ -55,11 +55,13 @@ public class PelamarModel implements Serializable {
 //	private UserModel user;
 	
 	@OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+	@JsonIgnore
 	@JoinColumn(name="user_id", referencedColumnName ="uuid")
 	private UserModel user;
 	
 	
 	@OneToMany(mappedBy = "pelamar", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonIgnore
     private List<LamaranModel> listLamaran;
 
 	public Long getIdPelamar() {
