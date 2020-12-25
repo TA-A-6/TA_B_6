@@ -14,17 +14,33 @@ public class PelamarServiceImpl implements PelamarService{
 	
 	@Autowired
 	PelamarDb pelamarDb;
-	/*
-	  Your code goes here.
-	  Jangan lupa isi dulu interface nya sebelum ngoding disini
-	  
-	  -Rian
-	 */
 
 	@Override
 	public PelamarModel getPelamarById(Long idPelamar) {
 		
 		return pelamarDb.findById(idPelamar).get();
+	}
+
+	@Override
+	public Boolean updatePelamar(PelamarModel pelamar) {
+		try {
+			PelamarModel pelamarFromDb = this.getPelamarById(pelamar.getIdPelamar());
+			
+			pelamarFromDb.setNama(pelamar.getNama());
+			pelamarFromDb.setNoTelepon(pelamar.getNoTelepon());
+			pelamarFromDb.setTanggalLahir(pelamar.getTanggalLahir());
+			pelamarFromDb.setAlamat(pelamar.getAlamat());
+			pelamarFromDb.setTempatLahir(pelamar.getTempatLahir());
+			
+			pelamarDb.save(pelamarFromDb);
+			
+			return true;
+			
+			
+		} catch(Exception e) {
+			return false;
+		}
+		
 	}
 
 }

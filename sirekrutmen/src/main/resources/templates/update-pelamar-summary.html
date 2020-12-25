@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="'Edit Pelamar: ' + ${first_message}"></title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container">
+	<h2 class="text-center" th:text="${first_message}"></h2>
+	<h4 class="text-center" th:text="${second_message}"></h4>
+	
+	<br><br>
+	<div class="text-center">
+	 	<a class="btn btn-primary" th:href="@{/}">Back to Home</a>
+	</div>	
+       
+  
+	</div>
+	
+</body>
+</html>
