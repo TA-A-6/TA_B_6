@@ -41,14 +41,13 @@ public class UserRestServiceImpl implements UserRestService{
 
     @Override
     public GajiBaseResponse[] getStatistikGaji() {
-        String endPoint = "sipayroll-b5.herokuapp.com/api/v1/karyawan-lama";
+        String endPoint = "https://sipayroll-b5.herokuapp.com/api/v1/karyawan-lama";
         WebClient webClient = WebClient.builder().baseUrl(endPoint).build();
 
         return webClient.get()
 				.uri(uriBuilder -> uriBuilder.build())
 				.retrieve()
 				.bodyToMono(GajiBaseResponse[].class).block();
-
     }
 
 }
