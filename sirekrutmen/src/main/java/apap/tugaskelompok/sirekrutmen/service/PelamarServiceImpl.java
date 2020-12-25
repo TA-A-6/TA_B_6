@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.repository.PelamarDb;
+import apap.tugaskelompok.sirekrutmen.repository.UserDb;
+
 import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.transaction.Transactional;
@@ -17,6 +19,9 @@ public class PelamarServiceImpl implements PelamarService{
 
 	@Autowired
 	PelamarDb pelamarDb;
+	
+	@Autowired
+	UserDb userDb;
 
 	@Override
 	public PelamarModel getPelamarById(Long idPelamar) {
@@ -54,6 +59,13 @@ public class PelamarServiceImpl implements PelamarService{
 	public List<PelamarModel> getPelamarByPelamarId(Integer Id){
 		return pelamarDb.findAllByIdPelamar(Id);
 
+	}
+
+	@Override
+	public PelamarModel getPelamarByUsernameUser(String username) {
+		String uuid = userDb.findByUsername(username).getUuid();
+		return pelamarDb.findByUser_Uuid(uuid);
+		
 	}
 
 }

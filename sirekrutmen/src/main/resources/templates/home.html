@@ -14,9 +14,9 @@
     	<img th:src="@{/images/sirekrutmen.png}" class="img-fluid" alt="Join SIREKRUTMEN">
     
    		<h1 class="greetings">Selamat Datang <br> di SI-REKRUTMEN,</h1>
-<!--   		<h1 class="the-user" th:text ="${#strings.toUpperCase(#authentication.getPrincipal().getUsername())} + '!'">Loggin as</h1>-->
+   		<h1 class="the-user" th:text ="${#strings.toUpperCase(#authentication.getPrincipal().getUsername())} + '!'">Loggin as</h1>
    		
-   		<button class="btn btn-primary btn-lowongan"> CARI LOWONGAN</button>
+   		<a class="btn btn-primary btn-lowongan" th:href="@{/lowongan}">CARI LOWONGAN</a>
     		
     
     </div>

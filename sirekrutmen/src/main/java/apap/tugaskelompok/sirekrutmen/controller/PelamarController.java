@@ -7,7 +7,7 @@ import apap.tugaskelompok.sirekrutmen.service.LamaranService;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,15 +28,15 @@ public class PelamarController {
 
 	@Autowired
 	PelamarService pelamarService;
-
 	
-	@GetMapping("/pelamar/update/{idPelamar}")
+	
+	@GetMapping("/pelamar/update")
 	public String updatePelamarFormPage(
-			@PathVariable Long idPelamar,
-			Model model
+			Model model,
+			Authentication auth
 	) {
 		
-		PelamarModel pelamar = pelamarService.getPelamarById(idPelamar);
+		PelamarModel pelamar = pelamarService.getPelamarByUsernameUser(auth.getName());
 		model.addAttribute("pelamar", pelamar);
 		
 		return "update-pelamar-form";

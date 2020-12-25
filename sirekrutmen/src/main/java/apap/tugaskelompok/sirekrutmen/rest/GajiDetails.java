@@ -2,7 +2,7 @@ package apap.tugaskelompok.sirekrutmen.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Date;
+import java.sql.Date;
 
 @JsonIgnoreProperties(value={"gaji"},allowGetters = true)
 public class GajiDetails {

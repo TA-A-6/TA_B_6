@@ -21,8 +21,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/js/**").permitAll()
-				.antMatchers("/lowongan/detail/**").hasAnyAuthority("Pelamar","Kepala Bagian","Kepala Departemen HR", "Staff Rekrutmen")
-				.antMatchers("/lowongan/hapus/**").hasAnyAuthority("Kepala Bagian","Kepala Departemen HR")
+			.antMatchers("/images/**").permitAll()
+			.antMatchers("/lowongan/detail/**").hasAnyAuthority("Pelamar","Kepala Bagian","Kepala Departemen HR", "Staff Rekrutmen")
+			.antMatchers("/lowongan/hapus/**").hasAnyAuthority("Kepala Bagian","Kepala Departemen HR")
+			.antMatchers("/user/create/**").hasAnyAuthority("Kepala Departemen HR", "Kepala Bagian")
+			.antMatchers("/pelamar/update/**").hasAnyAuthority("Pelamar")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login")
@@ -31,7 +34,6 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 			.permitAll();
 
-		//http.csrf().disable();
 	}
 	
 	@Bean
