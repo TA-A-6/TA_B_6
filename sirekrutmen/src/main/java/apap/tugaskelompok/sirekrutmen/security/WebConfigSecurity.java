@@ -25,7 +25,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers("/images/**").permitAll()
 			.antMatchers("/lowongan/detail/**").hasAnyAuthority("Pelamar","Kepala Bagian","Kepala Departemen HR", "Staff Rekrutmen")
 			.antMatchers("/lowongan/hapus/**").hasAnyAuthority("Kepala Bagian","Kepala Departemen HR")
-			.antMatchers("/user/create/**").hasAnyAuthority("Kepala Departemen HR", "Kepala Bagian")
+//			.antMatchers("/user/create/**").hasAnyAuthority("Kepala Departemen HR", "Kepala Bagian")
 			.antMatchers("/pelamar/update/**").hasAnyAuthority("Pelamar")
 			.anyRequest().authenticated()
 			.and()
