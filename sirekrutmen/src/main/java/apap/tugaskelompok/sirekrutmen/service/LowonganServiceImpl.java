@@ -46,7 +46,7 @@ public class LowonganServiceImpl implements LowonganService{
 			targetLowongan.setUser(lowongan.getUser());
 			targetLowongan.setJumlah(lowongan.getJumlah());
 
-			lowonganDb.save(targetLowongan);
+			//lowonganDb.save(targetLowongan);
 
 			return targetLowongan;
 		} catch (NullPointerException nullException) {

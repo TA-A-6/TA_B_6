@@ -18,14 +18,14 @@
 
 <div class="container">
 
-    <div th:if="${lowongan.listLamaran.size()==0}">
+    <div th:if="${size==0}">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">Change Data Lowongan</div>
                         <div class="card-body">
-                            <form th:action="@{/lamaran/ubah}" th:object="${lamaran}" method="POST">
+                            <form th:action="@{/lowongan/ubah}" th:object="${lowongan}" method="POST">
                                 <input type="hidden" th:field="*{idLowongan}"/>
 
                                 <label>Divisi</label>
@@ -46,6 +46,9 @@
                                     <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.uuid}"></option>
                                 </select>
 
+                                <label>Jumlah</label>
+                                <input type="number" name="jumlah" th:value="*{jumlah}" class="form-control"/>
+
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
@@ -54,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div th:if="${lowongan.listLamaran.size()>0}">
+    <div th:if="${size>0}">
 
         <div class="container-fluid">
             <div class="row">

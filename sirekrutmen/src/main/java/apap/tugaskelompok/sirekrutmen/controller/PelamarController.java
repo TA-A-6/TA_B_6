@@ -1,12 +1,23 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
-import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
-import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
-import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
+import apap.tugaskelompok.sirekrutmen.model.*;
+import apap.tugaskelompok.sirekrutmen.repository.PelamarDb;
+import apap.tugaskelompok.sirekrutmen.repository.RoleDb;
 import apap.tugaskelompok.sirekrutmen.service.LamaranService;
+import apap.tugaskelompok.sirekrutmen.service.UserService;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.sql.Date;
+import java.util.List;
+import java.util.UUID;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +26,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import java.text.SimpleDateFormat;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.service.PelamarService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +38,75 @@ public class PelamarController {
 
 	@Autowired
 	PelamarService pelamarService;
-	
+
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	RoleDb roleDb;
+
+	@Autowired
+	PelamarDb pelamarDb;
+
+	@RequestMapping("/pelamar/create")
+	public String createPelamarForm(Model model) {
+		model.addAttribute("successMessage", "");
+		return "create-pelamar";
+	}
+
+	@PostMapping("/pelamar/create")
+	public String createPelamarSubmit(
+			@RequestParam(value="nama", required=true) String nama,
+			@RequestParam(value="username", required=true) String username,
+			@RequestParam(value="password", required=true) String password,
+			@RequestParam(value="noTelepon", required=true) String noTelepon,
+			@RequestParam(value="tempatLahir", required=true) String tempatLahir,
+			@RequestParam(value="tanggalLahir", required=true) Date tanggalLahir,
+			@RequestParam(value="alamat", required=true) String alamat,
+			Model model
+
+	) {
+
+		// create user in si-rekrutmen
+		UserModel newUser = new UserModel();
+
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+
+		RoleModel role = roleDb.findById(Integer.toUnsignedLong(7)).get();
+		newUser.setRole(role);
+
+		newUser.setUuid(UUID.randomUUID().toString());
+
+		userService.addUser(newUser);
+
+
+
+		//crete pelamar
+		PelamarModel newPelamar = new PelamarModel();
+		newPelamar.setNama(nama);
+		newPelamar.setAlamat(alamat);
+
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		newPelamar.setTanggalLahir(tanggalLahir);
+
+		newPelamar.setTempatLahir(tempatLahir);
+		newPelamar.setNoTelepon(noTelepon);
+		newPelamar.setUser(userService.getUserByUsername(username));
+
+		pelamarDb.save(newPelamar);
+
+		//back to form
+
+		model.addAttribute("successMessage", "Calon pelamar berhasil ditambahkan");
+
+		return "create-pelamar";
+
+	}
+
+
 	
 	@GetMapping("/pelamar/update")
 	public String updatePelamarFormPage(

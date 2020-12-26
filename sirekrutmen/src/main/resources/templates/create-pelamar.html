@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Calon Pelamar</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <h2 class="text-center">Pendaftaran Calon Pelamar</h2>
+
+    <div class="card-body">
+        <form th:action="@{/pelamar/create}" method="POST">
+            <label>Nama</label>
+            <input type="text" name="nama" class="form-control" placeholder="Nama">
+            <br>
+
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Username">
+            <br>
+
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <br>
+
+            <label>No Telepon</label>
+            <input type="number" name="noTelepon" class="form-control" placeholder="No Telepon">
+            <br>
+
+            <label>Tempat Lahir</label>
+            <input type="text" name="tempatLahir" class="form-control" placeholder="Tempat Lahir">
+            <br>
+
+            <label>Tanggal Lahir</label>
+            <input type="date" name="tanggalLahir" class="form-control" placeholder="Tanggal Lahir">
+            <br>
+
+            <label>Alamat</label>
+            <input type="text" name="alamat" class="form-control" placeholder="Alamat">
+            <br>
+
+
+            <div class="text-right">
+                <button class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+        <br>
+        <h5 class="text-center" th:text="${successMessage}" style="color:red"></h5>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
