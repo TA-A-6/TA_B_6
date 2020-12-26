@@ -34,3 +34,5 @@ build/
 
 ### Mac Stuff ###
 .DS_Store
+
+sirekrutmen/src/main/resources/application.properties
