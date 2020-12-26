@@ -24,15 +24,14 @@
 </head>
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand navbar-expand-lg font-weight-bold navbar-light bg-light" style="background-color: #2D435B;">
-	<a th:text="SIREKRUTMEN" class="navbar-brand font-weight-bold" href="#"></a>
+	<a th:text="SIREKRUTMEN" class="navbar-brand font-weight-bold" th:href="@{/}"></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse text-left navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li><a id="len1" class="hoverable" href="lowongan">Lowongan</a></li>
-				<li><a id="len2" class="hoverable" href="pelamar">Pelamar</a></li>
-				<li><a id="len3" class="hoverable" href="#">Pengguna</a></li>
+				<li><a id="len1" class="hoverable" th:href="@{/lowongan}">Lowongan</a></li>
+				<li><a id="len1" class="hoverable" th:href="@{/user/profile}">Profil</a></li>
 				<li sec:authorize="isAuthenticated()" ><a id="len4" class="hoverable" th:href="@{/logout}">Logout</a></li>
 			</ul>
 	</div>

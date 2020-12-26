@@ -117,7 +117,7 @@ public class LowonganServiceImpl implements LowonganService{
 
 		List<LamaranModel> listPelamarModel = lowongan.getListLamaran();
 		for(LamaranModel nama : listPelamarModel){
-			pelamar.add(pelamarDb.findById(nama.getIdLamaran()).get());
+			pelamar.add(nama.getPelamar());
 		}
 
 		return pelamar;

@@ -8,8 +8,6 @@ import apap.tugaskelompok.sirekrutmen.service.UserService;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -18,10 +16,9 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.sql.Date;
-
 import java.util.List;
 import java.util.UUID;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,10 +27,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.text.SimpleDateFormat;
-
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.service.PelamarService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,13 +107,14 @@ public class PelamarController {
 	}
 
 
-	@GetMapping("/pelamar/update/{idPelamar}")
+	
+	@GetMapping("/pelamar/update")
 	public String updatePelamarFormPage(
-			@PathVariable Long idPelamar,
-			Model model
+			Model model,
+			Authentication auth
 	) {
 		
-		PelamarModel pelamar = pelamarService.getPelamarById(idPelamar);
+		PelamarModel pelamar = pelamarService.getPelamarByUsernameUser(auth.getName());
 		model.addAttribute("pelamar", pelamar);
 		
 		return "update-pelamar-form";
@@ -149,7 +145,7 @@ public class PelamarController {
 
 	@RequestMapping("/pelamar")
 	public String listLamaran(Model model) {
-		int diterima= 3;
+		int diterima= 2;
 
 		List<PelamarModel> listPelamar = pelamarService.getDaftarPelamar();
 		List<LamaranModel> listLamaran = lamaranService.getStatus(diterima);

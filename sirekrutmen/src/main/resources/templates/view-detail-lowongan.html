@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -44,14 +44,22 @@
                     <td>Jumlah</td>
                     <td th:text="': '+${lowongan.jumlah}"></td>
                 </tr>
+                <tr>
                     <td></td>
                     <td>
-                        <a class="btn btn-outline-primary">Hapus</a>
+                        <a th:if="${role.equals('Kepala Departemen HR') || role.equals('Kepala Bagian') || role.equals('Staff Rekrutmen')}" class="btn btn-primary" th:href="@{/lowongan/ubah/}+${lowongan.idLowongan}">Ubah</a>
+                        <a th:if="${role.equals('Kepala Departemen HR') || role.equals('Kepala Bagian')}" class="btn btn-danger" th:href="@{/lowongan/hapus/}+${lowongan.idLowongan}">Hapus</a>
+                    </td>
+                </tr>
+                <tr th:if="${role.equals('Pelamar')}">
+                    <td></td>
+                    <td>
+                        <a class="btn btn-primary">Lamar</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <div class="row">
+            <div class="row" th:if="${role.equals('Kepala Departemen HR') || role.equals('Kepala Bagian') || role.equals('Staff Rekrutmen')}">
                 <div class="col">
                     <div class="header" style="text-align: center"><h5><b>Daftar Pelamar</b></h5></div>
                     <table class="table table-borderless">
@@ -59,7 +67,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Status</th>
+                            <th sec:authorize="hasAnyAuthority('Kepala Bagian', 'Staff Rekrutmen')">Status</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -67,8 +75,9 @@
                         <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${pelamarNama.nama}"></td>
-                            <td><a th:href="@{/lamaran/ubah-status/}+${pelamarNama.idPelamar}" class="btn btn-info">Status</a></td>
-                            <td><a th:href="@{/lamaran/hapus/}+${pelamarNama.idPelamar}" class="btn btn-danger">Hapus</a></td>
+                            <td><a th:href="@{/lamaran/ubah-status/}+${pelamarNama.idPelamar}" class="btn btn-info" sec:authorize="hasAnyAuthority('Kepala Bagian', 'Staff Rekrutmen')">Status</a></td>
+                            <td><a th:href="@{/lamaran/hapus/}+${pelamarNama.idPelamar}" class="btn btn-danger" sec:authorize="hasAuthority('Kepala Bagian')">Hapus</a></td>
+
                         </tr>
                         </tbody>
                     </table>
