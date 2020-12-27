@@ -3,6 +3,7 @@ package apap.tugaskelompok.sirekrutmen.service;
 
 import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
 import apap.tugaskelompok.sirekrutmen.repository.LamaranDb;
+import apap.tugaskelompok.sirekrutmen.rest.PelatihanResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import apap.tugaskelompok.sirekrutmen.rest.PelatihanDetail;
@@ -31,12 +32,12 @@ public class LamaranRestServiceImpl implements LamaranRestService{
 	}
 
 	@Override
-	public Mono<String> postLamaran(PelatihanDetail pelatihanDetail){
+	public Mono<PelatihanResponse> postLamaran(PelatihanDetail pelatihanDetail){
 		return this.webClient.post().uri("/api/v1/pelatihan/tambah")
 				.contentType(MediaType.APPLICATION_JSON)
 				.bodyValue(pelatihanDetail)
 				.retrieve()
-				.bodyToMono(String.class);
+				.bodyToMono(PelatihanResponse.class);
 	}
 
 	@Override

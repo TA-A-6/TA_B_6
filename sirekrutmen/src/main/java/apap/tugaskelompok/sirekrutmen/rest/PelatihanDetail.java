@@ -2,41 +2,47 @@ package apap.tugaskelompok.sirekrutmen.rest;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(allowGetters = true)
 public class PelatihanDetail {
 
-    @JsonProperty("namaPelatihan")
+    @NotNull
+    @Size(max = 50)
     private String namaPelatihan;
 
-    @JsonProperty("deskripsi")
+    @NotNull
+    @Size(max = 200)
     private String deskripsi;
 
-    @JsonProperty("kapasitas")
+    @NotNull
     private Integer kapasitas;
 
-    @JsonProperty("tanggalMulai")
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date tanggalMulai;
 
-    @JsonProperty("tanggalSelesai")
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date tanggalSelesai;
 
-    @JsonProperty("waktuMulai")
+    @NotNull
+    @DateTimeFormat(pattern="HH:mm")
+    @Temporal(TemporalType.TIME)
     private Date waktuMulai;
 
-    @JsonProperty("waktuSelesai")
+    @NotNull
+    @DateTimeFormat(pattern="HH:mm")
+    @Temporal(TemporalType.TIME)
     private Date waktuSelesai;
-
-    public String getDeskripsi() {
-        return deskripsi;
-    }
-
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
-    }
 
     public String getNamaPelatihan() {
         return namaPelatihan;
@@ -46,6 +52,14 @@ public class PelatihanDetail {
         this.namaPelatihan = namaPelatihan;
     }
 
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
     public Integer getKapasitas() {
         return kapasitas;
     }
@@ -53,7 +67,9 @@ public class PelatihanDetail {
     public void setKapasitas(Integer kapasitas) {
         this.kapasitas = kapasitas;
     }
-
+    public void setKapasitas(String kapasitas) {
+        this.kapasitas = Integer.parseInt(kapasitas);
+    }
     public Date getTanggalMulai() {
         return tanggalMulai;
     }
@@ -86,3 +102,4 @@ public class PelatihanDetail {
         this.waktuSelesai = waktuSelesai;
     }
 }
+

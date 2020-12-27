@@ -1,6 +1,7 @@
 package apap.tugaskelompok.sirekrutmen.restcontroller;
 
 import apap.tugaskelompok.sirekrutmen.rest.PelatihanDetail;
+import apap.tugaskelompok.sirekrutmen.rest.PelatihanResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class LamaranRestController {
 
 
 	@GetMapping(value = "/pelatihan/dari/lamaran")
-	private Mono<String> lamaranPelatihan(PelatihanDetail pelatihanDetail){
+	private Mono<PelatihanResponse> lamaranPelatihan(PelatihanDetail pelatihanDetail){
 		return lamaranRestService.postLamaran(pelatihanDetail);
 	}
 
