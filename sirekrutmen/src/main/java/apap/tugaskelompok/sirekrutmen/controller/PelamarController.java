@@ -29,6 +29,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.SimpleDateFormat;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.service.PelamarService;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +67,8 @@ public class PelamarController {
 			@RequestParam(value="tempatLahir", required=true) String tempatLahir,
 			@RequestParam(value="tanggalLahir", required=true) Date tanggalLahir,
 			@RequestParam(value="alamat", required=true) String alamat,
-			Model model
+			Model model,
+			HttpServletRequest request
 
 	) {
 
@@ -100,9 +105,13 @@ public class PelamarController {
 
 		//back to form
 
-		model.addAttribute("successMessage", "Calon pelamar berhasil ditambahkan");
+		try {
+			request.login(username, password);
+		} catch (ServletException e) {
+			model.addAttribute("error", "error while login");
+		}
 
-		return "create-pelamar";
+		return "home";
 
 	}
 

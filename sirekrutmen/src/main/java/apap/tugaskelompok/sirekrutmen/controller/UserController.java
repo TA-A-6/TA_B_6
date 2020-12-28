@@ -151,11 +151,8 @@ public class UserController {
 			GajiBaseResponse gajiObject = listGajiObject[i];
 			GajiDetails gaji = gajiObject.getGaji();
 			totalGaji = totalGaji + gaji.getGajiPokok();
-			Date masuk = gaji.getTanggalMasuk();
-			ZoneId zoneId =ZoneId.systemDefault();
-			Instant instant = masuk.toInstant();
-			LocalDate tanggalMasuk = instant.atZone(zoneId).toLocalDate();
-			Period period = Period.between(tanggalMasuk,LocalDate.now());
+			LocalDate masuk = gaji.getTanggalMasuk().toLocalDate();
+			Period period = Period.between(masuk,LocalDate.now());
 			Long years = Long.valueOf(period.getYears());
 			listGaji.add(gaji);
 			listPegawai.add(gajiObject.getUsername());
