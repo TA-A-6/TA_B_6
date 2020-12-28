@@ -18,7 +18,6 @@ public class LamaranServiceImpl implements LamaranService {
 
 	@Override
 	public LamaranModel getLamaranById(Long idLamaran) {
-
 		return lamaranDb.findById(idLamaran).get();
 	}
 

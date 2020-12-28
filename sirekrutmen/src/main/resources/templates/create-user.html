@@ -15,6 +15,8 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
 	<div class="container">
+        <h5 class="text-center" th:text="${successMessage}" style="color:red"></h5>
+        <br>
 	<h2 class="text-center">Form Tambah Pengguna</h2>
        
         <div class="card-body">
@@ -60,7 +62,6 @@
                 </div>
             </form>
             <br>
-            <h5 class="text-center" th:text="${successMessage}" style="color:red"></h5>
             
 	
 		 </div>

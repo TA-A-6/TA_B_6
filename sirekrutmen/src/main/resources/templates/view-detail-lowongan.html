@@ -16,6 +16,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <div class="container-sm align-items-center justify-content-center">
+        <div th:id="${msg}" id="alert" class="alert d-flex justify-content-center" th:text="${msg}" th:classappend="${type}"></div>
         <div class="card align-content-center justify-content-center"
              style="width: 350px;
              margin: auto;
@@ -54,7 +55,7 @@
                 <tr th:if="${role.equals('Pelamar')}">
                     <td></td>
                     <td>
-                        <a class="btn btn-primary">Lamar</a>
+                        <a th:href="@{/pelamar/tambah/}+${lowongan.idLowongan}" class="btn btn-primary" sec:authorize="hasAuthority('Pelamar')">Melamar</a>
                     </td>
                 </tr>
                 </tbody>
