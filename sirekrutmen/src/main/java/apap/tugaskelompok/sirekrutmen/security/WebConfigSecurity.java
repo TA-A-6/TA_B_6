@@ -27,6 +27,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers("/lowongan/hapus/**").hasAnyAuthority("Kepala Bagian","Kepala Departemen HR")
 			.antMatchers("/user/create/**").hasAnyAuthority("Kepala Departemen HR", "Kepala Bagian")
 			.antMatchers("/pelamar/update/**").hasAnyAuthority("Pelamar")
+			.antMatchers("/pelamar/create/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login")
