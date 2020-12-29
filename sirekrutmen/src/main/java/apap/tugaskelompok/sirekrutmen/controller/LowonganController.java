@@ -76,16 +76,17 @@ public class LowonganController {
 	@PostMapping("/lowongan/add")
 	public String addLowonganSubmit(
 			@ModelAttribute LowonganModel lowongan,
-			Model model){
+			RedirectAttributes redir){
 		String code = lowonganService.getKode(lowongan);
 		lowongan.setKodeLowongan(code);
 
 		lowongan.setUser(userService.getUserByUsername(userService.getUserUsername()));
 
 		lowonganDb.save(lowongan);
+		redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan() + " berhasil ditambahkan.");
+		redir.addFlashAttribute("type", "alert-success");
 
-		model.addAttribute("lowongan", lowongan);
-		return "add-lowongan";
+		return "redirect:/lowongan";
 	}
 
 
@@ -113,20 +114,23 @@ public class LowonganController {
 	public String changeLowonganFormSubmit(
 
 			@ModelAttribute LowonganModel lowongan,
-			Model model
+			Model model, RedirectAttributes redir
 	){
+		LowonganModel lowonganUpdated = new LowonganModel();
 		if (lowongan.getDivisi()== null || lowongan.getPosisi() == null || lowongan.getJenisLowongan() == null){
-			LowonganModel lowonganUpdated = lowonganService.updateLowonganVer2(lowongan);
+			lowonganUpdated = lowonganService.updateLowonganVer2(lowongan);
 			model.addAttribute("lowonganUpdated", lowonganUpdated);
 		} else {
-			LowonganModel lowonganUpdated = lowonganService.updateLowongan(lowongan);
+			lowonganUpdated = lowonganService.updateLowongan(lowongan);
 			String newCode = lowonganService.getKode(lowonganUpdated);
 			lowonganUpdated.setKodeLowongan(newCode);
 			lowonganDb.save(lowonganUpdated);
 			model.addAttribute("lowonganUpdated", lowonganUpdated);
 		}
 
-		return "update-lowongan";
+		redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowonganUpdated.getKodeLowongan()  + " berhasil diupdate.");
+		redir.addFlashAttribute("type", "alert-success");
+		return "redirect:/lowongan/detail/"+lowonganUpdated.getIdLowongan();
 
 	}
 

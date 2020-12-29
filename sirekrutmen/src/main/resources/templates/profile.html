@@ -51,6 +51,10 @@
                 <td>Role</td>
                 <td th:text="': '+${role}"></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><a th:href="@{/pelamar/update}" class="btn btn-info" sec:authorize="hasAnyAuthority('Pelamar')">Update Profile</a></td>
+            </tr>
             </tbody>
         </table>
     </div>
