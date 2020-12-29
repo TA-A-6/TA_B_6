@@ -14,14 +14,20 @@
 
 
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-
-<div class="container">
-
-
-    <h2>Lamaran Anda Berhasil ditambahkan!</h2>
-
-</div>
-
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container-fluid">
+                    <div style="text-align: center;">
+                        <h2>Lamaran Anda berhasil ditambahkan!</h2>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a th:href="@{/lowongan/}" class="btn btn-primary">Kembali</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
