@@ -27,6 +27,7 @@ import java.util.NoSuchElementException;
 import apap.tugaskelompok.sirekrutmen.service.LowonganRestService;
 
 @RestController
+@CrossOrigin(origins="https://sipayroll-b5.herokuapp.com")
 @RequestMapping("/api/v1")
 public class LowonganRestController {
 
