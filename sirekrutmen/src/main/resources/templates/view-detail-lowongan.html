@@ -76,8 +76,8 @@
                         <tr th:each="pelamarNama, iterationStatus : ${pelamar}">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${pelamarNama.nama}"></td>
-                            <td><a th:href="@{/lamaran/ubah-status/}+${pelamarNama.idPelamar}" class="btn btn-info" sec:authorize="hasAnyAuthority('Kepala Bagian', 'Staff Rekrutmen')">Status</a></td>
-                            <td><a th:href="@{/lamaran/hapus/}+${pelamarNama.idPelamar}" class="btn btn-danger" sec:authorize="hasAuthority('Kepala Bagian')">Hapus</a></td>
+                            <td><a th:href="@{/lamaran/ubah-status/}+*{daftarLamaran[__${iterationStatus.index}__].idLamaran}" class="btn btn-info" sec:authorize="hasAnyAuthority('Kepala Bagian', 'Staff Rekrutmen')">Status</a></td>
+                            <td><a th:href="@{/lamaran/hapus/}+*{daftarLamaran[__${iterationStatus.index}__].idLamaran}" class="btn btn-danger" sec:authorize="hasAuthority('Kepala Bagian')">Hapus</a></td>
 
                         </tr>
                         </tbody>

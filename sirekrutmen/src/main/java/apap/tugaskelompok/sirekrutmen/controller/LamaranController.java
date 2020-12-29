@@ -108,8 +108,14 @@ public class LamaranController {
 		model.addAttribute("cukup", cukup);
 		model.addAttribute("lamaran", lamaranUpdated);
 //		System.out.println(cukup);
-		redir.addFlashAttribute("msg", "Status pelamar dengan ID"+ lamaranUpdated.getIdLamaran() + " berhasil diubah.");
-		redir.addFlashAttribute("type", "alert-success");
+		if (cukup){
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID"+ lamaranUpdated.getIdLamaran() + " berhasil diubah dan pelatihan On Boarding!");
+			redir.addFlashAttribute("type", "alert-success");
+		}else {
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID"+ lamaranUpdated.getIdLamaran() + " berhasil diubah.");
+			redir.addFlashAttribute("type", "alert-success");
+		}
+
 		return "redirect:/lowongan/detail/"+lamaranUpdated.getLowongan().getIdLowongan() ;
 	}
 

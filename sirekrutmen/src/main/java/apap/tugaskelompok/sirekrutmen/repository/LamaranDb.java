@@ -23,5 +23,7 @@ public interface LamaranDb extends JpaRepository<LamaranModel, Long>{
 
 	List<LamaranModel> findLamaranByLowonganAndStatus(LowonganModel lowongan, Integer status);
 
+	List<LamaranModel> findAllByLowonganIdLowongan(Long idLowongan);
+
 	
 }
