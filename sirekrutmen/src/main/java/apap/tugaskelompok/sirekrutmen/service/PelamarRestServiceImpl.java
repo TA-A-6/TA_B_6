@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -37,10 +39,18 @@ public class PelamarRestServiceImpl implements PelamarRestService{
 	}
 
 	@Override
-	public List<PelamarModel> getPelamarInLamaranModel(List<LamaranModel> lamaran){
-		List<PelamarModel> listDiterima=new ArrayList<PelamarModel>();
+	public List<Map<String,Object>> getPelamarInLamaranModel(List<LamaranModel> lamaran){
+//		List<PelamarModel> listDiterima=new ArrayList<PelamarModel>();
+		List<Map<String,Object>> listDiterima=new ArrayList<>();
+		HashMap<String,Object> isi=new HashMap<>();
+
 		for (int i = 0; i <= lamaran.size()-1; i++) {
-			listDiterima.add(lamaran.get(i).getPelamar());
+			isi.put("Nama",lamaran.get(i).getPelamar().getNama());
+			isi.put("idPelamar", lamaran.get(i).getPelamar().getIdPelamar());
+			isi.put("noTelepon", lamaran.get(i).getPelamar().getNoTelepon());
+			isi.put("alamat", lamaran.get(i).getPelamar().getAlamat());
+			isi.put("Divisi", lamaran.get(i).getLowongan().getDivisi());
+			listDiterima.add(isi);
 		}
 		return listDiterima;
 	}

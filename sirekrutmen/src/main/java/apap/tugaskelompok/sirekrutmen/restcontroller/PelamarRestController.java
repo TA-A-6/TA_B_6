@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -30,13 +31,13 @@ public class PelamarRestController {
 
 
 	@RequestMapping(value = "/pelamar")
-	private List<PelamarModel> listLamaran(Model model) {
+	private List<Map<String,Object>> listLamaran(Model model) {
 
 		try{
 			int diterima=2;
 			List<LamaranModel>  listLamaran = lamaranRestService.getStatus(diterima);
 
-			List<PelamarModel> listPelamar = pelamarRestService.getPelamarInLamaranModel(listLamaran);
+			List<Map<String,Object>> listPelamar = pelamarRestService.getPelamarInLamaranModel(listLamaran);
 
 			return listPelamar;
 		}catch (NoSuchElementException e){
