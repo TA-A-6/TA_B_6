@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 public interface LamaranRestService {
 
-	Mono<PelatihanResponse> postLamaran(PelatihanDetail pelatihanDetail);
+	Mono<String> postLamaran(PelatihanDetail pelatihanDetail);
 
 	List<LamaranModel> getStatus(int status);
 
