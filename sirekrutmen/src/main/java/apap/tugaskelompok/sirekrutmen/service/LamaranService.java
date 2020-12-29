@@ -19,4 +19,5 @@ public interface LamaranService {
 	LamaranModel ubahStatusLamaran(LamaranModel lamaran);
 	List<LamaranModel> getLamaranByLowonganAndStatus(LowonganModel lowongan, Integer status);
 	LamaranModel deleteLamaran(LamaranModel lamaran);
+	List<LamaranModel> getAllLamaranByIdLowongan(Long idLowongan);
 }

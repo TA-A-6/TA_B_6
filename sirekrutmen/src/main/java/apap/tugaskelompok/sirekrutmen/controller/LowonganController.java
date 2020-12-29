@@ -3,6 +3,7 @@ package apap.tugaskelompok.sirekrutmen.controller;
 import apap.tugaskelompok.sirekrutmen.model.*;
 import apap.tugaskelompok.sirekrutmen.repository.LowonganDb;
 import apap.tugaskelompok.sirekrutmen.service.JenisLowonganService;
+import apap.tugaskelompok.sirekrutmen.service.LamaranService;
 import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
@@ -30,6 +31,9 @@ import java.util.List;
 public class LowonganController {
 	@Autowired
 	LowonganService lowonganService;
+
+	@Autowired
+	LamaranService lamaranService;
 
 	@Autowired
 	UserService userService;
@@ -144,11 +148,16 @@ public class LowonganController {
 		String role = userService.getUserByUsername(auth.getName()).getRole().getNama();
 		model.addAttribute("role",role);
 		LowonganModel lowongan = lowonganService.getLowonganById(id);
-		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
+		List<PelamarModel> daftarPelamar = new ArrayList<>();
+		List<LamaranModel> daftarLamaran = lamaranService.getAllLamaranByIdLowongan(id);
 
+		for (LamaranModel lamaran : daftarLamaran) {
+			daftarPelamar.add(lamaran.getPelamar());
+		}
 
 		model.addAttribute("lowongan",lowongan);
 		model.addAttribute("pelamar",daftarPelamar);
+		model.addAttribute("daftarLamaran", daftarLamaran);
 		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());
 		return "view-detail-lowongan";
 	}
