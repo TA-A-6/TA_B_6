@@ -45,11 +45,11 @@ public class PelamarRestServiceImpl implements PelamarRestService{
 		HashMap<String,Object> isi=new HashMap<>();
 
 		for (int i = 0; i <= lamaran.size()-1; i++) {
-			isi.put("Nama",lamaran.get(i).getPelamar().getNama());
+			isi.put("nama",lamaran.get(i).getPelamar().getNama());
 			isi.put("idPelamar", lamaran.get(i).getPelamar().getIdPelamar());
 			isi.put("noTelepon", lamaran.get(i).getPelamar().getNoTelepon());
 			isi.put("alamat", lamaran.get(i).getPelamar().getAlamat());
-			isi.put("Divisi", lamaran.get(i).getLowongan().getDivisi());
+			isi.put("divisi", lamaran.get(i).getLowongan().getDivisi());
 			listDiterima.add(isi);
 		}
 		return listDiterima;
