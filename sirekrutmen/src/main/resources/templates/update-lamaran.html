@@ -14,16 +14,17 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <div class="container-fluid">
-        <div class="card">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="container-fluid">
-                        <div style="text-align: center;">
-                            <h2 th:text="'Status pelamar dengan ID ' + ${lamaran.idLamaran} + ' berhasil diubah'"></h2>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <a th:href="@{/lowongan/}" class="btn btn-primary">Kembali</a>
-                        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container-fluid">
+                    <div style="text-align: center;">
+                        <h2 th:text="'Status pelamar dengan ID ' + ${lamaran.idLamaran} + ' berhasil diubah'"></h2>
+                    </div>
+                    <div th:if="${cukup}">
+                        <h4 style="color: green;">Pelatihan On Boarding!</h4>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a th:href="@{/lowongan/}" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>
