@@ -130,7 +130,7 @@ public class LowonganController {
 
 		redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowonganUpdated.getKodeLowongan()  + " berhasil diupdate.");
 		redir.addFlashAttribute("type", "alert-success");
-		return "redirect:/lowongan";
+		return "redirect:/lowongan/detail/"+lowonganUpdated.getIdLowongan();
 
 	}
 

@@ -29,21 +29,21 @@
                                 <input type="hidden" th:field="*{idLowongan}"/>
 
                                 <label>Divisi</label>
-                                <input type="text" name="divisi" th:value="*{divisi}" class="form-control"/>
+                                <input type="text" name="divisi" th:value="*{divisi}" maxlength="20" class="form-control"/>
 
                                 <label>Posisi</label>
-                                <input type="text" name="posisi" th:value="*{posisi}" class="form-control"/>
+                                <input type="text" name="posisi" th:value="*{posisi}" maxlength="20" class="form-control"/>
 
                                 <label>Jenis Lowongan</label>
-                                <select name="jenisLowongan" class="form-control">
-                                    <option selected value=""> -- Pilih Jenis Lowongan -- </option>
+                                <select name="jenisLowongan" class="form-control" th:value="*{jenisLowongan.nama}">
+                                    <!--<option selected value=""> -- Pilih Jenis Lowongan -- </option>-->
                                     <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenisLowongan}" th:text="${jenis.nama}"></option>
                                 </select>
 
                                 <label>User</label>
-                                <select name="user" class="form-control">
-                                    <option selected value=""> -- Pilih User -- </option>
-                                    <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.uuid}"></option>
+                                <select name="user" class="form-control" th:value="*{user.username}">
+                                    <!--<option selected value=""> -- Pilih User -- </option>-->
+                                    <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.username}"></option>
                                 </select>
 
                                 <label>Jumlah</label>
@@ -70,9 +70,8 @@
 
 
                                 <label>User</label>
-                                <select name="user" class="form-control">
-                                    <option selected value=""> -- Pilih User -- </option>
-                                    <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.uuid}"></option>
+                                <select name="user" class="form-control" th:value="*{user.username}">
+                                    <option th:each="user : ${listUser}" th:value="${user.uuid}" th:text="${user.username}"></option>
                                 </select>
 
                                 <label>Jumlah</label>

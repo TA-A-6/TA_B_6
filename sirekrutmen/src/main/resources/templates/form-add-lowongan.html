@@ -28,10 +28,10 @@
                             <input type="hidden" th:field="*{idLowongan}"/>
 
                             <label>Divisi</label>
-                            <input type="text" name="divisi" th:value="*{divisi}" class="form-control"/>
+                            <input type="text" name="divisi" th:value="*{divisi}" maxlength="20" class="form-control"/>
 
                             <label>Posisi</label>
-                            <input type="text" name="posisi" th:value="*{posisi}" class="form-control"/>
+                            <input type="text" name="posisi" th:value="*{posisi}" maxlength="20" class="form-control"/>
 
                             <label>Jenis Lowongan</label>
                             <select name="jenisLowongan" class="form-control">
