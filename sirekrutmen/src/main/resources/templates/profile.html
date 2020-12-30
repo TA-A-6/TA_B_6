@@ -27,25 +27,29 @@
                 <td>Username</td>
                 <td th:text="': '+${username}"></td>
             </tr>
-            <tr th:if="${choose}">
+            <tr>
                 <td>Nama</td>
-                <td th:text="': '+${pegawai.nama}"></td>
+                <td th:text="': '+${user.nama}"></td>
             </tr>
-            <tr th:if="${choose}">
+            <tr>
                 <td>Nomor telepon</td>
-                <td th:text="': '+${pegawai.noTelepon}"></td>
+                <td th:text="': '+${user.noTelepon}"></td>
             </tr>
-            <tr th:if="${choose}">
+            <tr>
                 <td>Tempat Lahir</td>
-                <td th:text="': '+${pegawai.tempatLahir}"></td>
+                <td th:text="': '+${user.tempatLahir}"></td>
             </tr>
-            <tr th:if="${choose}">
+            <tr th:if="${role.equals('Pelamar')}">
                 <td>Tanggal Lahir</td>
-                <td th:text="': '+${pegawai.tanggalLahir}"></td>
+                <td th:text="': '+${#dates.format(user.tanggalLahir,'dd/MM/yyyy')}"></td>
             </tr>
-            <tr th:if="${choose}">
+            <tr th:if="${!role.equals('Pelamar')}">
+                <td>Tanggal Lahir</td>
+                <td th:text="': '+${user.tanggalLahir}"></td>
+            </tr>
+            <tr>
                 <td>Alamat</td>
-                <td th:text="': '+${pegawai.alamat}"></td>
+                <td th:text="': '+${user.alamat}"></td>
             </tr>
             <tr>
                 <td>Role</td>

@@ -1,8 +1,10 @@
 package apap.tugaskelompok.sirekrutmen.controller;
 
+import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 import apap.tugaskelompok.sirekrutmen.rest.PegawaiBaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.GajiBaseResponse;
 import apap.tugaskelompok.sirekrutmen.rest.GajiDetails;
+import apap.tugaskelompok.sirekrutmen.service.PelamarService;
 import apap.tugaskelompok.sirekrutmen.service.UserRestService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -42,6 +44,9 @@ public class UserController {
 
 	@Autowired
 	private UserRestService userRestService;
+
+	@Autowired
+	private PelamarService pelamarService;
 	
 	
 	@RequestMapping("/add/{username}/{password}")
@@ -121,20 +126,25 @@ public class UserController {
 	public String viewProfile(Model model){
 		UserModel user = userService.getUserByUsername(
 				SecurityContextHolder.getContext().getAuthentication().getName());
-		String username = user.getUsername();
-		Boolean choose = false;
-		try{
-			PegawaiBaseResponse<PegawaiDetail> pegawai = userRestService.getDataPegawai(user.getUsername());
-			choose = true;
-			model.addAttribute("pegawai", pegawai.getResult());
-//			model.addAttribute("role", pegawai.getResult().getRoleName());
-		}catch(Exception e){
 
-			choose = false;
+		if(user.getRole().getIdRole()>=1 && user.getRole().getIdRole()<7){
+			PegawaiBaseResponse<PegawaiDetail> pegawai = userRestService.getDataPegawai(user.getUsername());
+			model.addAttribute("user", pegawai.getResult());
+		}else{
+			PelamarModel pelamar = pelamarService.getPelamarByUsernameUser(user.getUsername());
+			model.addAttribute("user",pelamar);
 		}
+//		try{
+//			PegawaiBaseResponse<PegawaiDetail> pegawai = userRestService.getDataPegawai(user.getUsername());
+//			choose = true;
+//			model.addAttribute("pegawai", pegawai.getResult());
+////			model.addAttribute("role", pegawai.getResult().getRoleName());
+//		}catch(Exception e){
+//
+//			choose = false;
+//		}
 		model.addAttribute("role", user.getRole().getNama());
-		model.addAttribute("choose", choose);
-		model.addAttribute("username",username);
+		model.addAttribute("username",user.getUsername());
 		return "profile";
 	}
 
