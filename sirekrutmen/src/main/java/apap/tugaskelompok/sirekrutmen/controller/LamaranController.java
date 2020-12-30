@@ -55,11 +55,23 @@ public class LamaranController {
 			Model model
 	){
 		LamaranModel lamaran = lamaranService.getLamaranById(idLamaran);
+		int statusLamaran = 0;
 
-		if(lamaran.getStatus() == 2){
+		if (lamaran.getStatus() == 0){
+			statusLamaran = 0;
+		}
+		else if(lamaran.getStatus() == 1){
+			statusLamaran = 1;
+		}
+		else if(lamaran.getStatus() == 2){
+			statusLamaran = 2;
 		    Date dateTerima = new Date();
 		    lamaran.setTanggalDiterima(dateTerima);
-        }
+        }else{
+			statusLamaran = 3;
+		}
+
+		model.addAttribute("statusLamaran", statusLamaran);
 		model.addAttribute("lamaran", lamaran);
 		return "update-status-lamaran";
 	}
@@ -81,8 +93,8 @@ public class LamaranController {
 		if (jumlahLamaran == kapasitas){
 			cukup = true;
 			PelatihanDetail pelatihanDetail = new PelatihanDetail();
-			pelatihanDetail.setNamaPelatihan("Pelatihan" + lowonganLamaran.getPosisi());
-			pelatihanDetail.setDeskripsi("Pelatihan untuk para pelamar dari lowongan" + lowonganLamaran.getPosisi());
+			pelatihanDetail.setNamaPelatihan("Pelatihan " + lowonganLamaran.getPosisi());
+			pelatihanDetail.setDeskripsi("Pelatihan untuk para pelamar dari lowongan " + lowonganLamaran.getPosisi());
 			pelatihanDetail.setKapasitas(kapasitas);
 
 			java.util.Date mulai = new java.util.Date();
@@ -107,12 +119,12 @@ public class LamaranController {
 		}
 		model.addAttribute("cukup", cukup);
 		model.addAttribute("lamaran", lamaranUpdated);
-//		System.out.println(cukup);
+
 		if (cukup){
-			redir.addFlashAttribute("msg", "Status pelamar dengan ID"+ lamaranUpdated.getIdLamaran() + " berhasil diubah dan pelatihan On Boarding!");
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID "+ lamaranUpdated.getIdLamaran() + " berhasil diubah dan pelatihan On Boarding!");
 			redir.addFlashAttribute("type", "alert-success");
 		}else {
-			redir.addFlashAttribute("msg", "Status pelamar dengan ID"+ lamaranUpdated.getIdLamaran() + " berhasil diubah.");
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID "+ lamaranUpdated.getIdLamaran() + " berhasil diubah.");
 			redir.addFlashAttribute("type", "alert-success");
 		}
 
