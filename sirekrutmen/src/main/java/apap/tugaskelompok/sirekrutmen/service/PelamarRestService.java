@@ -4,6 +4,7 @@ import apap.tugaskelompok.sirekrutmen.model.LamaranModel;
 import apap.tugaskelompok.sirekrutmen.model.PelamarModel;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PelamarRestService {
 	
@@ -15,5 +16,5 @@ public interface PelamarRestService {
 
 	List<PelamarModel> getDaftarPelamar();
 
-	List<PelamarModel> getPelamarInLamaranModel(List<LamaranModel> lamaran);
+	List<Map<String,Object>> getPelamarInLamaranModel(List<LamaranModel> lamaran);
 }
