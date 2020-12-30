@@ -126,6 +126,10 @@ public class LowonganServiceImpl implements LowonganService{
 
 	@Override
 	public void deteleLowongan(LowonganModel lowongan) {
+		List<LamaranModel> daftarLamaran = lowongan.getListLamaran();
+		for(LamaranModel lamaran: daftarLamaran){
+			lamaranDb.delete(lamaran);
+		}
 		lowonganDb.deleteById(lowongan.getIdLowongan());
 	}
 }
