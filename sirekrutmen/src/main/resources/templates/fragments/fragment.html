@@ -30,8 +30,10 @@
 	</button>
 	<div class="collapse text-left navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li><a id="len1" class="hoverable" th:href="@{/lowongan}">Lowongan</a></li>
-				<li><a id="len1" class="hoverable" th:href="@{/user/profile}">Profil</a></li>
+				<li sec:authorize="isAuthenticated()"><a id="len1" class="hoverable" th:href="@{/lowongan}">Lowongan</a></li>
+				<li sec:authorize="hasAnyAuthority('Kepala Bagian', 'Kepala Departemen HR')"><a id="len1" class="hoverable" th:href="@{/user/create}" >Tambah pengguna</a></li>
+				<li sec:authorize="isAuthenticated()" ><a id="len1" class="hoverable" th:href="@{/user/salary_statistics}">Statistik Gaji</a></li>
+				<li sec:authorize="isAuthenticated()" ><a id="len1" class="hoverable" th:href="@{/user/profile}">Profil</a></li>
 				<li sec:authorize="isAuthenticated()" ><a id="len4" class="hoverable" th:href="@{/logout}">Logout</a></li>
 			</ul>
 	</div>

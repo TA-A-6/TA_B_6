@@ -3,6 +3,7 @@ package apap.tugaskelompok.sirekrutmen.controller;
 import apap.tugaskelompok.sirekrutmen.model.*;
 import apap.tugaskelompok.sirekrutmen.repository.LowonganDb;
 import apap.tugaskelompok.sirekrutmen.service.JenisLowonganService;
+import apap.tugaskelompok.sirekrutmen.service.LamaranService;
 import apap.tugaskelompok.sirekrutmen.service.UserService;
 
 import apap.tugaskelompok.sirekrutmen.model.LowonganModel;
@@ -30,6 +31,9 @@ import java.util.List;
 public class LowonganController {
 	@Autowired
 	LowonganService lowonganService;
+
+	@Autowired
+	LamaranService lamaranService;
 
 	@Autowired
 	UserService userService;
@@ -76,16 +80,17 @@ public class LowonganController {
 	@PostMapping("/lowongan/add")
 	public String addLowonganSubmit(
 			@ModelAttribute LowonganModel lowongan,
-			Model model){
+			RedirectAttributes redir){
 		String code = lowonganService.getKode(lowongan);
 		lowongan.setKodeLowongan(code);
 
 		lowongan.setUser(userService.getUserByUsername(userService.getUserUsername()));
 
 		lowonganDb.save(lowongan);
+		redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan() + " berhasil ditambahkan.");
+		redir.addFlashAttribute("type", "alert-success");
 
-		model.addAttribute("lowongan", lowongan);
-		return "add-lowongan";
+		return "redirect:/lowongan";
 	}
 
 
@@ -113,20 +118,23 @@ public class LowonganController {
 	public String changeLowonganFormSubmit(
 
 			@ModelAttribute LowonganModel lowongan,
-			Model model
+			Model model, RedirectAttributes redir
 	){
+		LowonganModel lowonganUpdated = new LowonganModel();
 		if (lowongan.getDivisi()== null || lowongan.getPosisi() == null || lowongan.getJenisLowongan() == null){
-			LowonganModel lowonganUpdated = lowonganService.updateLowonganVer2(lowongan);
+			lowonganUpdated = lowonganService.updateLowonganVer2(lowongan);
 			model.addAttribute("lowonganUpdated", lowonganUpdated);
 		} else {
-			LowonganModel lowonganUpdated = lowonganService.updateLowongan(lowongan);
+			lowonganUpdated = lowonganService.updateLowongan(lowongan);
 			String newCode = lowonganService.getKode(lowonganUpdated);
 			lowonganUpdated.setKodeLowongan(newCode);
 			lowonganDb.save(lowonganUpdated);
 			model.addAttribute("lowonganUpdated", lowonganUpdated);
 		}
 
-		return "update-lowongan";
+		redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowonganUpdated.getKodeLowongan()  + " berhasil diupdate.");
+		redir.addFlashAttribute("type", "alert-success");
+		return "redirect:/lowongan/detail/"+lowonganUpdated.getIdLowongan();
 
 	}
 
@@ -140,11 +148,16 @@ public class LowonganController {
 		String role = userService.getUserByUsername(auth.getName()).getRole().getNama();
 		model.addAttribute("role",role);
 		LowonganModel lowongan = lowonganService.getLowonganById(id);
-		List<PelamarModel> daftarPelamar = lowonganService.getDaftarPelamar(lowongan);
+		List<PelamarModel> daftarPelamar = new ArrayList<>();
+		List<LamaranModel> daftarLamaran = lamaranService.getAllLamaranByIdLowongan(id);
 
+		for (LamaranModel lamaran : daftarLamaran) {
+			daftarPelamar.add(lamaran.getPelamar());
+		}
 
 		model.addAttribute("lowongan",lowongan);
 		model.addAttribute("pelamar",daftarPelamar);
+		model.addAttribute("daftarLamaran", daftarLamaran);
 		model.addAttribute("jenisLowongan",lowongan.getJenisLowongan().getNama());
 		return "view-detail-lowongan";
 	}
@@ -162,6 +175,7 @@ public class LowonganController {
 				statusLamaran = false;
 			}
 		}
+
 		if(statusLamaran){
 			lowonganService.deteleLowongan(lowongan);
 			redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan() + " berhasil dihapus.");

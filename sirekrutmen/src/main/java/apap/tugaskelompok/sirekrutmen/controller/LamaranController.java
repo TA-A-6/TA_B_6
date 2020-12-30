@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import apap.tugaskelompok.sirekrutmen.service.LamaranService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.text.DateFormat;
@@ -54,11 +55,23 @@ public class LamaranController {
 			Model model
 	){
 		LamaranModel lamaran = lamaranService.getLamaranById(idLamaran);
+		int statusLamaran = 0;
 
-		if(lamaran.getStatus() == 2){
+		if (lamaran.getStatus() == 0){
+			statusLamaran = 0;
+		}
+		else if(lamaran.getStatus() == 1){
+			statusLamaran = 1;
+		}
+		else if(lamaran.getStatus() == 2){
+			statusLamaran = 2;
 		    Date dateTerima = new Date();
 		    lamaran.setTanggalDiterima(dateTerima);
-        }
+        }else{
+			statusLamaran = 3;
+		}
+
+		model.addAttribute("statusLamaran", statusLamaran);
 		model.addAttribute("lamaran", lamaran);
 		return "update-status-lamaran";
 	}
@@ -67,7 +80,8 @@ public class LamaranController {
 	@PostMapping("/lamaran/ubah")
 	public String changeStatusLamaranFormSubmit(
 			@ModelAttribute LamaranModel lamaran,
-			Model model
+			Model model,
+			RedirectAttributes redir
 	){
 		LamaranModel lamaranUpdated = lamaranService.ubahStatusLamaran(lamaran);
 
@@ -79,8 +93,8 @@ public class LamaranController {
 		if (jumlahLamaran == kapasitas){
 			cukup = true;
 			PelatihanDetail pelatihanDetail = new PelatihanDetail();
-			pelatihanDetail.setNamaPelatihan("Pelatihan" + lowonganLamaran.getPosisi());
-			pelatihanDetail.setDeskripsi("Pelatihan untuk para pelamar dari lowongan" + lowonganLamaran.getPosisi());
+			pelatihanDetail.setNamaPelatihan("Pelatihan " + lowonganLamaran.getPosisi());
+			pelatihanDetail.setDeskripsi("Pelatihan untuk para pelamar dari lowongan " + lowonganLamaran.getPosisi());
 			pelatihanDetail.setKapasitas(kapasitas);
 
 			java.util.Date mulai = new java.util.Date();
@@ -105,31 +119,43 @@ public class LamaranController {
 		}
 		model.addAttribute("cukup", cukup);
 		model.addAttribute("lamaran", lamaranUpdated);
-		System.out.println(cukup);
-		return "update-lamaran";
+
+		if (cukup){
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID "+ lamaranUpdated.getIdLamaran() + " berhasil diubah dan pelatihan On Boarding!");
+			redir.addFlashAttribute("type", "alert-success");
+		}else {
+			redir.addFlashAttribute("msg", "Status pelamar dengan ID "+ lamaranUpdated.getIdLamaran() + " berhasil diubah.");
+			redir.addFlashAttribute("type", "alert-success");
+		}
+
+		return "redirect:/lowongan/detail/"+lamaranUpdated.getLowongan().getIdLowongan() ;
 	}
 
     @GetMapping(value = "/lamaran/hapus/{idLamaran}")
     public String deleteLamaran(
             @PathVariable(value = "idLamaran") Long idLamaran,
-            Model model){
+            Model model,
+			RedirectAttributes redir
+	){
 
         LamaranModel lamaran = lamaranService.getLamaranById(idLamaran);
 
         if (lamaran.getStatus() == 3){
-            lamaranService.deleteLamaran(lamaran);
             model.addAttribute("lamaran", lamaran);
-
-            return "delete-lamaran";
+			redir.addFlashAttribute("msg", "Lamaran dengan ID "+ lamaran.getIdLamaran() + " berhasil dihapus.");
+			redir.addFlashAttribute("type", "alert-success");
+			lamaranService.deleteLamaran(lamaran);
         }else {
-            return "delete-handling-lamaran";
+			redir.addFlashAttribute("msg", "Lamaran dengan ID "+ lamaran.getIdLamaran() + " tidak bisa dihapus karena status bukan ditolak.");
+			redir.addFlashAttribute("type", "alert-danger");
         }
-
+		return "redirect:/lowongan/detail/"+lamaran.getLowongan().getIdLowongan();
     }
 
 	@GetMapping("/pelamar/tambah/{idLowongan}")
 	public String tambahLamaran(@PathVariable Long idLowongan,
-								Model model) {
+								RedirectAttributes redir
+	) {
 
 		UserModel username=userService.getUserByUsername(userService.getUserUsername());
 		LowonganModel lowongan=lowonganService.getLowonganById(idLowongan);
@@ -147,13 +173,15 @@ public class LamaranController {
 			lamaran.setLowongan(lowongan);
 
 			lamaranDb.save(lamaran);
-			return "add-lamaran";
+
+			redir.addFlashAttribute("msg", "Lamaran Anda Berhasil ditambahkan!");
+			redir.addFlashAttribute("type", "alert-success");
 		}
 		else{
-			return "gagal-lamaran";
+			redir.addFlashAttribute("msg", "Lamaran tidak bisa ditambahkan, hanya user dengan role pelamar yang bisa menambahkan lamaran");
+			redir.addFlashAttribute("type", "alert-danger");
 		}
-
-
+		return "redirect:/lowongan/detail/"+idLowongan ;
 	}
 
 	

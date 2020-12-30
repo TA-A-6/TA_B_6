@@ -34,7 +34,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-			.permitAll();
+			.permitAll()
+				.and()
+				.cors()
+				.and()
+				.csrf()
+				.disable();
 
 	}
 	

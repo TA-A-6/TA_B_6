@@ -18,7 +18,6 @@ public class LamaranServiceImpl implements LamaranService {
 
 	@Override
 	public LamaranModel getLamaranById(Long idLamaran) {
-
 		return lamaranDb.findById(idLamaran).get();
 	}
 
@@ -37,6 +36,7 @@ public class LamaranServiceImpl implements LamaranService {
 	public List<LamaranModel> getStatus(int status) {
 		return lamaranDb.findAllByStatus(status);
 	}
+
 	@Override
 	public LamaranModel ubahStatusLamaran (LamaranModel lamaran){
 		LamaranModel lamaranUpdated = lamaranDb.findById(lamaran.getIdLamaran()).get();
@@ -54,6 +54,11 @@ public class LamaranServiceImpl implements LamaranService {
 	public LamaranModel deleteLamaran(LamaranModel lamaran){
 		lamaranDb.delete(lamaran);
 		return lamaran;
+	}
+
+	@Override
+	public List<LamaranModel> getAllLamaranByIdLowongan(Long idLowongan) {
+		return lamaranDb.findAllByLowonganIdLowongan(idLowongan);
 	}
 
 }

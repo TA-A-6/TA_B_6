@@ -18,9 +18,7 @@ public class LamaranRestController {
 
 
 	@GetMapping(value = "/pelatihan/dari/lamaran")
-	private Mono<PelatihanResponse> lamaranPelatihan(PelatihanDetail pelatihanDetail){
+	private Mono<String> lamaranPelatihan(PelatihanDetail pelatihanDetail){
 		return lamaranRestService.postLamaran(pelatihanDetail);
-	}
-
-	
+	}	
 }

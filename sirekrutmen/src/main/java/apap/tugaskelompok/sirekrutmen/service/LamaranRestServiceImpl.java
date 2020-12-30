@@ -32,12 +32,16 @@ public class LamaranRestServiceImpl implements LamaranRestService{
 	}
 
 	@Override
-	public Mono<PelatihanResponse> postLamaran(PelatihanDetail pelatihanDetail){
-		return this.webClient.post().uri("/api/v1/pelatihan/tambah")
+	public Mono<String> postLamaran(PelatihanDetail pelatihanDetail){
+		
+		Mono<String> result = this.webClient.post().uri("/api/v1/pelatihan/tambah")
 				.contentType(MediaType.APPLICATION_JSON)
 				.bodyValue(pelatihanDetail)
 				.retrieve()
-				.bodyToMono(PelatihanResponse.class);
+				.bodyToMono(String.class);
+		
+		System.out.println(result.block());
+		return result;
 	}
 
 	@Override
