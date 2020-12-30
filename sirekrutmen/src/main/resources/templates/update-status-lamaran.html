@@ -29,9 +29,9 @@
                                     <option value="1">Wawancara</option>
                                 </select>
                                 <br>
-                                <div class="col-sm d-flex justify-content-center">
-                                    <button type = "submit" class="btn btn-primary">Simpan</button>
-                                </div>
+                                <!--<div class="col-sm d-flex justify-content-center">-->
+                                    <!--<button type = "submit" class="btn btn-primary">Simpan</button>-->
+                                <!--</div>-->
                             </div>
                             <div th:if="${statusLamaran == 1}">
                                 <h4 style="color: #0c5460"> Status pelamar sudah wawancara! </h4>
@@ -56,10 +56,10 @@
                                     <option value="2">Diterima</option>
                                     <option value="3">Ditolak</option>
                                 </select>
-                                <br>
-                                <div class="col-sm d-flex justify-content-center">
-                                    <button type = "submit" class="btn btn-primary">Simpan</button>
-                                </div>
+                                <!--<br>-->
+                                <!--<div class="col-sm d-flex justify-content-center">-->
+                                    <!--<button type = "submit" class="btn btn-primary">Simpan</button>-->
+                                <!--</div>-->
                             </div>
                             <div th:if="${statusLamaran == 2}">
                                 <h4 style="color: green"> Status pelamar sudah diterima! </h4>
@@ -70,11 +70,10 @@
                                 <a th:href="@{/lowongan/}" class="btn btn-primary">Kembali</a>
                             </div>
                         </div>
-
-                        <!--<br>-->
-                        <!--<div class="col-sm d-flex justify-content-center">-->
-                            <!--<button type = "submit" class="btn btn-primary">Simpan</button>-->
-                        <!--</div>-->
+                        <br>
+                        <div class="col-sm d-flex justify-content-center">
+                            <button type = "submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>
