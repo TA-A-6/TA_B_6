@@ -175,7 +175,6 @@ public class LowonganController {
 				statusLamaran = false;
 			}
 		}
-
 		if(statusLamaran){
 			lowonganService.deteleLowongan(lowongan);
 			redir.addFlashAttribute("msg", "Lowongan dengan kode "+ lowongan.getKodeLowongan() + " berhasil dihapus.");
