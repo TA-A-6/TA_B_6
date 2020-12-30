@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.io.Serializable;
 
 @Entity
-@Table(name="user_account")
+@Table(name="user")
 public class UserModel implements Serializable{
 	
 	
