@@ -130,6 +130,9 @@ public class LowonganServiceImpl implements LowonganService{
 		for(LamaranModel lamaran: daftarLamaran){
 			lamaranDb.delete(lamaran);
 		}
+		LowonganModel targetLowonganToBeDeleted = lowonganDb.findById(lowongan.getIdLowongan());
+		targetLowonganToBeDeleted.setListLamaran(null);
+		lowonganDb.save(targetLowonganToBeDeleted);
 		lowonganDb.deleteById(lowongan.getIdLowongan());
 	}
 }
