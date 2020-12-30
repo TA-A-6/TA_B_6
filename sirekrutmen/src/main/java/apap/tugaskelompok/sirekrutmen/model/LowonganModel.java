@@ -53,7 +53,8 @@ public class LowonganModel implements Serializable {
 	@JsonIgnore
 	private JenisLowonganModel jenisLowongan;
 	
-	@OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     private List<LamaranModel> listLamaran;
 
 	public Long getIdLowongan() {
