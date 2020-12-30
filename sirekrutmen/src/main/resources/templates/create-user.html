@@ -15,7 +15,10 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
 	<div class="container">
-        <h5 class="text-center" th:text="${successMessage}" style="color:red"></h5>
+        <!-- <h5 class="text-center" th:text="${successMessage}" style="color:red"></h5> -->
+        
+        <div th:id="${msg}" id="alert" class="alert d-flex justify-content-center" th:text="${msg}" th:classappend="${type}"></div>
+        
         <br>
 	<h2 class="text-center">Form Tambah Pengguna</h2>
        

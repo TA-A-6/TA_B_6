@@ -88,36 +88,46 @@ public class UserController {
 			
 	) {
 		
-		// create user in si-rekrutmen
-		UserModel newUser = new UserModel();
-		
-		newUser.setUsername(username);
-		newUser.setPassword(password);
-		
-		RoleModel role = roleDb.findById(Integer.toUnsignedLong(roleId)).get();
-		newUser.setRole(role);
-		
-		userService.addUser(newUser);
-		
-		
-		//crete pegawai to si-pegawai
-		PegawaiDetail newPegawai = new PegawaiDetail();
-		
-		newPegawai.setNama(nama);
-		newPegawai.setUsername(username);
-		newPegawai.setAlamat(alamat);
-		newPegawai.setTanggalLahir(tanggalLahir);
-		newPegawai.setTempatLahir(tempatLahir);
-		newPegawai.setRole(roleId);
-		newPegawai.setNoTelepon(noTelepon);
-		
-		userRestService.postUserToSipegawai(newPegawai);
-		
-		//back to form
-		List<RoleModel> listRole = roleDb.findAll();
-		model.addAttribute("successMessage", "Pengguna berhasil ditambahkan");
-		model.addAttribute("listRole", listRole);
-		return "create-user";
+		try {
+			// create user in si-rekrutmen
+			UserModel newUser = new UserModel();
+			
+			newUser.setUsername(username);
+			newUser.setPassword(password);
+			
+			RoleModel role = roleDb.findById(Integer.toUnsignedLong(roleId)).get();
+			newUser.setRole(role);
+			
+			userService.addUser(newUser);
+			
+			
+			//crete pegawai to si-pegawai
+			PegawaiDetail newPegawai = new PegawaiDetail();
+			
+			newPegawai.setNama(nama);
+			newPegawai.setUsername(username);
+			newPegawai.setAlamat(alamat);
+			newPegawai.setTanggalLahir(tanggalLahir);
+			newPegawai.setTempatLahir(tempatLahir);
+			newPegawai.setRole(roleId);
+			newPegawai.setNoTelepon(noTelepon);
+			
+			userRestService.postUserToSipegawai(newPegawai);
+			
+			//back to form
+			List<RoleModel> listRole = roleDb.findAll();
+			model.addAttribute("msg", "Pengguna berhasil ditambahkan");
+			model.addAttribute("type", "alert-success");
+			model.addAttribute("listRole", listRole);
+			return "create-user";
+		} catch (Exception e) {
+			List<RoleModel> listRole = roleDb.findAll();
+			model.addAttribute("msg", "Terjadi kesalahan saat menambahkan pengguna");
+			model.addAttribute("type", "alert-danger");
+			model.addAttribute("listRole", listRole);
+			return "create-user";
+			
+		}
 		
 	}
 	
