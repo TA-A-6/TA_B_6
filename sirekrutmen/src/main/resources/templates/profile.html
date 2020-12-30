@@ -39,9 +39,13 @@
                 <td>Tempat Lahir</td>
                 <td th:text="': '+${user.tempatLahir}"></td>
             </tr>
-            <tr>
+            <tr th:if="${role.equals('Pelamar')}">
                 <td>Tanggal Lahir</td>
                 <td th:text="': '+${#dates.format(user.tanggalLahir,'dd/MM/yyyy')}"></td>
+            </tr>
+            <tr th:if="${!role.equals('Pelamar')}">
+                <td>Tanggal Lahir</td>
+                <td th:text="': '+${user.tanggalLahir}"></td>
             </tr>
             <tr>
                 <td>Alamat</td>
